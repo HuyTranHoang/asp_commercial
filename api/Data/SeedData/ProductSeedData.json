@@ -1,0 +1,42 @@
+[
+  {
+    "Name": "Product 1",
+    "Description": "This is a description for Product 1",
+    "Price": 19.99,
+    "PictureUrl": "https://example.com/product1.jpg",
+    "ProductTypeId": 1,
+    "ProductBrandId": 1
+  },
+  {
+    "Name": "Product 2",
+    "Description": "This is a description for Product 2",
+    "Price": 29.99,
+    "PictureUrl": "https://example.com/product2.jpg",
+    "ProductTypeId": 2,
+    "ProductBrandId": 2
+  },
+  {
+    "Name": "Product 3",
+    "Description": "This is a description for Product 3",
+    "Price": 39.99,
+    "PictureUrl": "https://example.com/product3.jpg",
+    "ProductTypeId": 3,
+    "ProductBrandId": 3
+  },
+  {
+    "Name": "Product 4",
+    "Description": "This is a description for Product 4",
+    "Price": 49.99,
+    "PictureUrl": "https://example.com/product4.jpg",
+    "ProductTypeId": 4,
+    "ProductBrandId": 4
+  },
+  {
+    "Name": "Product 5",
+    "Description": "This is a description for Product 5",
+    "Price": 59.99,
+    "PictureUrl": "https://example.com/product5.jpg",
+    "ProductTypeId": 5,
+    "ProductBrandId": 5
+  }
+]
