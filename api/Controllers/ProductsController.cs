@@ -24,7 +24,24 @@ public class ProductsController : BaseApiController
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Product>> GetProduct(int id)
     {
-        return await _productRepository.GetProductById(id);
+        var product = await _productRepository.GetProductById(id);
+        if (product == null)
+        {
+            return NotFound($"Product with id {id} not found");
+        }
+
+        return Ok(product);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<Product>> CreateProduct(Product product)
+    {
+        _productRepository.CreateProduct(product);
+
+        if (await _productRepository.SaveAll())
+            return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
+
+        return BadRequest("Failed to create product");
     }
 
     [HttpPut("{id:int}")]
@@ -36,7 +53,17 @@ public class ProductsController : BaseApiController
             return NotFound($"Product with id {id} not found");
         }
 
-        return await _productRepository.UpdateProduct(product);
+        existingProduct.Name = product.Name;
+        existingProduct.Description = product.Description;
+        existingProduct.Price = product.Price;
+        existingProduct.ProductBrandId = product.ProductBrandId;
+        existingProduct.ProductTypeId = product.ProductTypeId;
+
+        _productRepository.UpdateProduct(existingProduct);
+
+        if (await _productRepository.SaveAll()) return Ok(existingProduct);
+
+        return BadRequest("Failed to update product");
     }
 
     [HttpDelete("{id:int}")]
@@ -48,8 +75,11 @@ public class ProductsController : BaseApiController
             return NotFound($"Product with id {id} not found");
         }
 
-        await _productRepository.DeleteProduct(id);
-        return Ok();
+        _productRepository.DeleteProduct(existingProduct);
+
+        if (await _productRepository.SaveAll()) return Ok("Product deleted");
+
+        return BadRequest("Failed to delete product");
     }
 
 }

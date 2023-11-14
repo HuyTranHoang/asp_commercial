@@ -24,31 +24,24 @@ public class ProductRepository : IProductRepository
         return await _context.Products.FindAsync(id);
     }
 
-    public async Task<Product> CreateProduct(Product product)
+    public void CreateProduct(Product product)
     {
         _context.Products.Add(product);
-        await _context.SaveChangesAsync();
-        return product;
     }
 
-    public async Task<Product> UpdateProduct(Product product)
+    public void UpdateProduct(Product product)
     {
         _context.Entry(product).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
-        return product;
     }
 
-    public async Task DeleteProduct(int id)
+    public void DeleteProduct(Product product)
     {
-        var productToDelete = await _context.Products.FindAsync(id);
+        _context.Products.Remove(product);
+    }
 
-        if (productToDelete == null)
-        {
-            throw new Exception("Product not found");
-        }
-
-        _context.Products.Remove(productToDelete);
-        await _context.SaveChangesAsync();
+    public async Task<bool> SaveAll()
+    {
+        return await _context.SaveChangesAsync() > 0;
     }
 
 }
