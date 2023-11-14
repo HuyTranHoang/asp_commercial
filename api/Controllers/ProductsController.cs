@@ -1,8 +1,6 @@
-﻿using api.Data;
-using api.Entities;
+﻿using api.Entities;
 using api.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers;
 
@@ -28,4 +26,30 @@ public class ProductsController : BaseApiController
     {
         return await _productRepository.GetProductById(id);
     }
+
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<Product>> UpdateProduct(int id, Product product)
+    {
+        var existingProduct = await _productRepository.GetProductById(id);
+        if (existingProduct == null)
+        {
+            return NotFound($"Product with id {id} not found");
+        }
+
+        return await _productRepository.UpdateProduct(product);
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult> DeleteProduct(int id)
+    {
+        var existingProduct = await _productRepository.GetProductById(id);
+        if (existingProduct == null)
+        {
+            return NotFound($"Product with id {id} not found");
+        }
+
+        await _productRepository.DeleteProduct(id);
+        return Ok();
+    }
+
 }

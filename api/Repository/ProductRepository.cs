@@ -23,4 +23,32 @@ public class ProductRepository : IProductRepository
     {
         return await _context.Products.FindAsync(id);
     }
+
+    public async Task<Product> CreateProduct(Product product)
+    {
+        _context.Products.Add(product);
+        await _context.SaveChangesAsync();
+        return product;
+    }
+
+    public async Task<Product> UpdateProduct(Product product)
+    {
+        _context.Entry(product).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+        return product;
+    }
+
+    public async Task DeleteProduct(int id)
+    {
+        var productToDelete = await _context.Products.FindAsync(id);
+
+        if (productToDelete == null)
+        {
+            throw new Exception("Product not found");
+        }
+
+        _context.Products.Remove(productToDelete);
+        await _context.SaveChangesAsync();
+    }
+
 }
