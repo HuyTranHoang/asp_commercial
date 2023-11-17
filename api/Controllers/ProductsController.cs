@@ -48,10 +48,7 @@ public class ProductsController : BaseApiController
     public async Task<ActionResult<Product>> UpdateProduct(int id, Product product)
     {
         var existingProduct = await _productRepository.GetProductById(id);
-        if (existingProduct == null)
-        {
-            return NotFound($"Product with id {id} not found");
-        }
+        if (existingProduct == null) return NotFound($"Product with id {id} not found");
 
         existingProduct.Name = product.Name;
         existingProduct.Description = product.Description;
