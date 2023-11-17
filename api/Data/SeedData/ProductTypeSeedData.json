@@ -1,17 +1,14 @@
 [
   {
-    "Name": "Romance"
+    "Name": "Comic"
   },
   {
-    "Name": "Romance"
+    "Name": "Fiction"
   },
   {
-    "Name": "Fantasy"
+    "Name": "Romantic"
   },
   {
-    "Name": "Mystery"
-  },
-  {
-    "Name": "History"
+    "Name": "Programming"
   }
 ]
