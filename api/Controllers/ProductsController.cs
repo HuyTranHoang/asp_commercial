@@ -19,7 +19,8 @@ public class ProductsController : BaseApiController
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
     {
-        var products = await _unitOfWork.ProductRepository.Get(null, includeProperties: "ProductType,ProductBrand");
+        var products = await _unitOfWork.ProductRepository
+            .Get(null, includeProperties: "ProductType,ProductBrand");
 
         var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
         return Ok(productsDto);
@@ -28,7 +29,10 @@ public class ProductsController : BaseApiController
     [HttpGet("{id:int}")]
     public async Task<ActionResult<ProductDto>> GetProduct(int id)
     {
-        var product = await _unitOfWork.ProductRepository.GetById(id);
+        var query = await _unitOfWork.ProductRepository
+            .Get(p => p.Id == id, includeProperties: "ProductType,ProductBrand");
+
+        var product = query.FirstOrDefault();
         if (product == null)
         {
             return NotFound($"Product with id {id} not found");

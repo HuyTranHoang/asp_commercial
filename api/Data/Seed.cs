@@ -16,10 +16,8 @@ public class Seed
 
         var products = JsonSerializer.Deserialize<List<Product>>(productData, options);
 
-        foreach (var product in products)
-        {
-            context.Products.Add(product);
-        }
+        context.Products.AddRange(products);
+
         await context.SaveChangesAsync();
     }
 
@@ -33,10 +31,8 @@ public class Seed
 
         var types = JsonSerializer.Deserialize<List<ProductType>>(typeData, options);
 
-        foreach (var type in types)
-        {
-            context.ProductTypes.Add(type);
-        }
+        context.ProductTypes.AddRange(types);
+
         await context.SaveChangesAsync();
     }
 
@@ -50,10 +46,8 @@ public class Seed
 
         var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandData, options);
 
-        foreach (var brand in brands)
-        {
-            context.ProductBrands.Add(brand);
-        }
+        context.ProductBrands.AddRange(brands);
+
         await context.SaveChangesAsync();
     }
 }

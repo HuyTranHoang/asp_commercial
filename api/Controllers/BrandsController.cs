@@ -23,10 +23,7 @@ public class BrandsController : BaseApiController
     public async Task<ActionResult<ProductBrand>> GetBrand(int id)
     {
         var brand = await _unitOfWork.ProductBrandRepository.GetById(id);
-        if (brand == null)
-        {
-            return NotFound($"Brand with id {id} not found");
-        }
+        if (brand == null) return NotFound($"Brand with id {id} not found");
 
         return Ok(brand);
     }
