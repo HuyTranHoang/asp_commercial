@@ -16,12 +16,18 @@ public class ProductRepository : IProductRepository
 
     public async Task<IEnumerable<Product>> GetProducts()
     {
-        return await _context.Products.ToListAsync();
+        return await _context.Products
+            .Include(p => p.ProductType)
+            .Include(p => p.ProductBrand)
+            .ToListAsync();
     }
 
     public async Task<Product> GetProductById(int id)
     {
-        return await _context.Products.FindAsync(id);
+        return await _context.Products
+            .Include(p => p.ProductType)
+            .Include(p => p.ProductBrand)
+            .SingleOrDefaultAsync(p => p.Id == id);
     }
 
     public void CreateProduct(Product product)
