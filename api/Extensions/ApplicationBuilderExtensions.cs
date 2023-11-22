@@ -12,7 +12,7 @@ public static class ApplicationBuilderExtensions
         try
         {
             var context = services.GetRequiredService<ApplicationDbContext>();
-            context.Database.Migrate();
+            await context.Database.MigrateAsync();
             await Seed.SeedTypes(context);
             await Seed.SeedBrands(context);
             await Seed.SeedProducts(context);

@@ -4,17 +4,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api.Data;
 
-public class Seed
+public static class Seed
 {
+    private static JsonSerializerOptions Options { get; set; } = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+    private const string ProductSeedData = "Data/SeedData/ProductSeedData.json";
+    private const string ProductTypeSeedData = "Data/SeedData/ProductTypeSeedData.json";
+    private const string ProductBrandSeedData = "Data/SeedData/ProductBrandSeedData.json";
+
     public static async Task SeedProducts(ApplicationDbContext context)
     {
         if (await context.Products.AnyAsync()) return;
 
-        var productData = await File.ReadAllTextAsync("Data/SeedData/ProductSeedData.json");
+        var productData = await File.ReadAllTextAsync(ProductSeedData);
 
-        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-
-        var products = JsonSerializer.Deserialize<List<Product>>(productData, options);
+        var products = JsonSerializer.Deserialize<List<Product>>(productData, Options);
 
         context.Products.AddRange(products);
 
@@ -25,11 +28,9 @@ public class Seed
     {
         if (await context.ProductTypes.AnyAsync()) return;
 
-        var typeData = await File.ReadAllTextAsync("Data/SeedData/ProductTypeSeedData.json");
+        var typeData = await File.ReadAllTextAsync(ProductTypeSeedData);
 
-        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-
-        var types = JsonSerializer.Deserialize<List<ProductType>>(typeData, options);
+        var types = JsonSerializer.Deserialize<List<ProductType>>(typeData, Options);
 
         context.ProductTypes.AddRange(types);
 
@@ -40,11 +41,9 @@ public class Seed
     {
         if (await context.ProductBrands.AnyAsync()) return;
 
-        var brandData = await File.ReadAllTextAsync("Data/SeedData/ProductBrandSeedData.json");
+        var brandData = await File.ReadAllTextAsync(ProductBrandSeedData);
 
-        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-
-        var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandData, options);
+        var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandData, Options);
 
         context.ProductBrands.AddRange(brands);
 

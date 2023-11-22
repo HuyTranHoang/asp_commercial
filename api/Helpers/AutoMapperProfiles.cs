@@ -16,6 +16,7 @@ public class AutoMapperProfiles : Profile
             .ForMember(dest => dest.PictureUrl,
                 opt => opt.MapFrom<ProductImageUrlResolver>());
 
-        CreateMap<ProductDto, Product>();
+        CreateMap<Product, Product>();
+
     }
 }

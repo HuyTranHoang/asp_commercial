@@ -20,7 +20,7 @@ public class ProductsController : BaseApiController
     public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
     {
         var products = await _unitOfWork.ProductRepository
-            .Get(null, includeProperties: "ProductType,ProductBrand");
+            .Get(includeProperties: "ProductType,ProductBrand");
 
         var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
         return Ok(productsDto);
@@ -59,11 +59,7 @@ public class ProductsController : BaseApiController
         var existingProduct = await _unitOfWork.ProductRepository.GetById(id);
         if (existingProduct == null) return NotFound($"Product with id {id} not found");
 
-        existingProduct.Name = product.Name;
-        existingProduct.Description = product.Description;
-        existingProduct.Price = product.Price;
-        existingProduct.ProductBrandId = product.ProductBrandId;
-        existingProduct.ProductTypeId = product.ProductTypeId;
+        _mapper.Map(product, existingProduct);
 
         _unitOfWork.ProductRepository.Update(existingProduct);
 

@@ -6,7 +6,7 @@ public interface IGenericRepository<T> where T : class
 {
     public Task<IEnumerable<T>> GetAll();
     public Task<IEnumerable<T>> Get(
-        Expression<Func<T, bool>> expression,
+        Expression<Func<T, bool>> expression = null,
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, // q => q.OrderBy(s => s.lastName)
         string includeProperties = "");
     public Task<T> GetById(int id);
