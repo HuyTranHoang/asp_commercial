@@ -22,15 +22,15 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
 
     public async Task<IEnumerable<T>> Get(
-        Expression<Func<T, bool>> expression = null,
+        Expression<Func<T, bool>> filter = null,
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, // q => q.OrderBy(s => s.lastName)
         string includeProperties = "")
     {
         IQueryable<T> query = _dbSet;
 
-        if (expression != null)
+        if (filter != null)
         {
-            query = query.Where(expression);
+            query = query.Where(filter);
         }
 
         if (!string.IsNullOrEmpty(includeProperties))

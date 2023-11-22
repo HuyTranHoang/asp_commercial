@@ -19,29 +19,36 @@ public class ProductsController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts(
-        [FromQuery] string sort, int? brandId, int? typeId)
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts(string sort, int? brandId, int? typeId)
     {
-        Expression<Func<Product, bool>> filter = x => (!brandId.HasValue || x.ProductBrandId == brandId) &&
-            (!typeId.HasValue || x.ProductTypeId == typeId);
+        var filter = BuildFilterExpression(brandId, typeId);
 
-        Func<IQueryable<Product>, IOrderedQueryable<Product>> sortQuery = sort switch
-        {
-            "priceAsc" => p => p.OrderBy(i => i.Price),
-            "priceDesc" => p => p.OrderByDescending(i => i.Price),
-            "typeAsc" => p => p.OrderBy(i => i.ProductTypeId),
-            "typeDesc" => p => p.OrderByDescending(i => i.ProductTypeId),
-            "brandAsc" => p => p.OrderBy(i => i.ProductBrandId),
-            "brandDesc" => p => p.OrderByDescending(i => i.ProductBrandId),
-            _ => p => p.OrderBy(i => i.Name)
-        };
+        var sortQuery = BuildSortQuery(sort);
 
         var products = await _unitOfWork.ProductRepository
             .Get(filter, sortQuery, "ProductType,ProductBrand");
 
         var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
+
         return Ok(productsDto);
     }
+
+    private static Expression<Func<Product, bool>> BuildFilterExpression(int? brandId, int? typeId)
+    {
+        return x => (!brandId.HasValue || x.ProductBrandId == brandId) &&
+            (!typeId.HasValue || x.ProductTypeId == typeId);
+    }
+
+    private static Func<IQueryable<Product>, IOrderedQueryable<Product>> BuildSortQuery(string sort)
+    {
+        return sort switch
+        {
+            "priceAsc" => p => p.OrderBy(i => i.Price),
+            "priceDesc" => p => p.OrderByDescending(i => i.Price),
+            _ => p => p.OrderBy(i => i.Name)
+        };
+    }
+
 
     [HttpGet("{id:int}")]
     public async Task<ActionResult<ProductDto>> GetProduct(int id)
