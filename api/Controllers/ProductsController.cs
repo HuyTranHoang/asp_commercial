@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 using api.DTOs;
 using api.Entities;
-using api.Extensions;
 using api.Repository.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
