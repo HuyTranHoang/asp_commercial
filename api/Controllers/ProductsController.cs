@@ -1,5 +1,7 @@
-﻿using api.DTOs;
+﻿using System.Linq.Expressions;
+using api.DTOs;
 using api.Entities;
+using api.Extensions;
 using api.Repository.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +19,25 @@ public class ProductsController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts(
+        [FromQuery] string sort, int? brandId, int? typeId)
     {
+        Expression<Func<Product, bool>> filter = x => (!brandId.HasValue || x.ProductBrandId == brandId) &&
+            (!typeId.HasValue || x.ProductTypeId == typeId);
+
+        Func<IQueryable<Product>, IOrderedQueryable<Product>> sortQuery = sort switch
+        {
+            "priceAsc" => p => p.OrderBy(i => i.Price),
+            "priceDesc" => p => p.OrderByDescending(i => i.Price),
+            "typeAsc" => p => p.OrderBy(i => i.ProductTypeId),
+            "typeDesc" => p => p.OrderByDescending(i => i.ProductTypeId),
+            "brandAsc" => p => p.OrderBy(i => i.ProductBrandId),
+            "brandDesc" => p => p.OrderByDescending(i => i.ProductBrandId),
+            _ => p => p.OrderBy(i => i.Name)
+        };
+
         var products = await _unitOfWork.ProductRepository
-            .Get(includeProperties: "ProductType,ProductBrand");
+            .Get(filter, sortQuery, "ProductType,ProductBrand");
 
         var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
         return Ok(productsDto);
