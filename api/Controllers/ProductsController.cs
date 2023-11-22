@@ -40,10 +40,7 @@ public class ProductsController : BaseApiController
             .Get(p => p.Id == id, includeProperties: "ProductType,ProductBrand");
 
         var product = query.FirstOrDefault();
-        if (product == null)
-        {
-            return NotFound($"Product with id {id} not found");
-        }
+        if (product == null) return NotFound($"Product with id {id} not found");
 
         var productDto = _mapper.Map<ProductDto>(product);
         return Ok(productDto);
@@ -79,10 +76,7 @@ public class ProductsController : BaseApiController
     public async Task<ActionResult> DeleteProduct(int id)
     {
         var existingProduct = await _unitOfWork.ProductRepository.GetById(id);
-        if (existingProduct == null)
-        {
-            return NotFound($"Product with id {id} not found");
-        }
+        if (existingProduct == null) return NotFound($"Product with id {id} not found");
 
         _unitOfWork.ProductRepository.Delete(existingProduct);
 
