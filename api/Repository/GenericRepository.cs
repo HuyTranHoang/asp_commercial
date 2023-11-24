@@ -73,7 +73,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return await PagedList<T>.CreateAsync(query, pagingParams.PageNumber, pagingParams.PageSize);
     }
 
-    public async Task<PagedList<TDto>> Get<TDto>(
+    public async Task<PagedList<TDto>> GetDto<TDto>(
         Expression<Func<T, bool>> filter = null,
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
         string includeProperties = "",

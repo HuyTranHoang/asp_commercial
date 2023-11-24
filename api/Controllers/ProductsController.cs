@@ -25,7 +25,7 @@ public class ProductsController : BaseApiController
         [FromQuery] ProductParams request,
         [FromQuery] PaginationParams pagingParams)
     {
-        var productDtos = await _unitOfWork.ProductRepository.Get<ProductDto>(
+        var productDtos = await _unitOfWork.ProductRepository.GetDto<ProductDto>(
             BuildFilterExpression(request),
             BuildSortQuery(request),
             "ProductType,ProductBrand",

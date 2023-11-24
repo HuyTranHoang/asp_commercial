@@ -13,7 +13,7 @@ public interface IGenericRepository<T> where T : class
         string includeProperties = "",
         PaginationParams pagingParams = null);
 
-    public Task<PagedList<TDto>> Get<TDto>(
+    public Task<PagedList<TDto>> GetDto<TDto>(
         Expression<Func<T, bool>> filter = null,
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, // q => q.OrderBy(s => s.lastName)
         string includeProperties = "",
