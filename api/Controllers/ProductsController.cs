@@ -7,7 +7,6 @@ using api.Helpers.RequestQuery;
 using api.Repository.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace api.Controllers;
 
@@ -26,19 +25,16 @@ public class ProductsController : BaseApiController
         [FromQuery] ProductParams request,
         [FromQuery] PaginationParams pagingParams)
     {
-        var filter = BuildFilterExpression(request);
-
-        var sortQuery = BuildSortQuery(request);
-
-        var products = await _unitOfWork.ProductRepository
-            .Get(filter, sortQuery, "ProductType,ProductBrand", pagingParams);
-
-        var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
+        var productDtos = await _unitOfWork.ProductRepository.Get<ProductDto>(
+            BuildFilterExpression(request),
+            BuildSortQuery(request),
+            "ProductType,ProductBrand",
+            pagingParams);
 
         Response.AddPaginationHeader(new PaginationHeader(
-            pagingParams.PageNumber, pagingParams.PageSize, products.TotalCount, products.TotalPages));
+            pagingParams.PageNumber, pagingParams.PageSize, productDtos.TotalCount, productDtos.TotalPages));
 
-        return Ok(productsDto);
+        return Ok(productDtos);
     }
 
     [HttpGet("{id:int}")]
