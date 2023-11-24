@@ -12,6 +12,13 @@ public interface IGenericRepository<T> where T : class
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, // q => q.OrderBy(s => s.lastName)
         string includeProperties = "",
         PaginationParams pagingParams = null);
+
+    public Task<PagedList<TDto>> Get<TDto>(
+        Expression<Func<T, bool>> filter = null,
+        Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, // q => q.OrderBy(s => s.lastName)
+        string includeProperties = "",
+        PaginationParams pagingParams = null);
+
     public Task<T> GetById(int id);
     public void Create(T entity);
     public void Update(T entity);

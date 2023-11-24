@@ -1,6 +1,7 @@
 using api.Data;
 using api.Entities;
 using api.Repository.Interfaces;
+using AutoMapper;
 
 namespace api.Repository
 {
@@ -10,9 +11,11 @@ namespace api.Repository
         private IGenericRepository<Product> _productRepository;
         private IGenericRepository<ProductBrand> _productBrandRepository;
         private IGenericRepository<ProductType> _productTypeRepository;
+        private readonly IMapper _mapper;
 
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork(ApplicationDbContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
         }
 
@@ -21,7 +24,7 @@ namespace api.Repository
             get
             {
                 if (_productRepository == null)
-                    _productRepository = new GenericRepository<Product>(_context);
+                    _productRepository = new GenericRepository<Product>(_context, _mapper);
 
                 return _productRepository;
             }
