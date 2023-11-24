@@ -1,5 +1,7 @@
 using System.Linq.Expressions;
 using api.Data;
+using api.Helpers;
+using api.Helpers.RequestQuery;
 using api.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,10 +23,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     }
 
 
-    public async Task<IEnumerable<T>> Get(
+    public async Task<PagedList<T>> Get(
         Expression<Func<T, bool>> filter = null,
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, // q => q.OrderBy(s => s.lastName)
-        string includeProperties = "")
+        string includeProperties = "",
+        PagingParams pagingParams = null)
     {
         IQueryable<T> query = _dbSet;
 
@@ -46,7 +49,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
             query = orderBy(query);
         }
 
-        return await query.ToListAsync();
+        return await PagedList<T>.CreateAsync(query, pagingParams.PageNumber, pagingParams.PageSize);
     }
 
     public async Task<T> GetById(int id)
@@ -68,4 +71,5 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         _dbSet.Remove(entity);
     }
+
 }

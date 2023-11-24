@@ -1,9 +1,13 @@
 ﻿using System.Linq.Expressions;
 using api.DTOs;
 using api.Entities;
+using api.Extensions;
+using api.Helpers;
+using api.Helpers.RequestQuery;
 using api.Repository.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace api.Controllers;
 
@@ -18,16 +22,20 @@ public class ProductsController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts(string sort, int? brandId, int? typeId)
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts([FromQuery] ProductParams request,
+        [FromQuery] PagingParams pagingParams)
     {
-        var filter = BuildFilterExpression(brandId, typeId);
+        var filter = BuildFilterExpression(request);
 
-        var sortQuery = BuildSortQuery(sort);
+        var sortQuery = BuildSortQuery(request);
 
         var products = await _unitOfWork.ProductRepository
-            .Get(filter, sortQuery, "ProductType,ProductBrand");
+            .Get(filter, sortQuery, "ProductType,ProductBrand", pagingParams);
 
         var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
+
+        Response.AddPaginationHeader(new PaginationHeader(
+            pagingParams.PageNumber, pagingParams.PageSize, products.TotalCount, products.TotalPages));
 
         return Ok(productsDto);
     }
@@ -86,14 +94,19 @@ public class ProductsController : BaseApiController
 
     #region helper methods
 
-    private static Expression<Func<Product, bool>> BuildFilterExpression(int? brandId, int? typeId)
+    private static Expression<Func<Product, bool>> BuildFilterExpression(ProductParams request)
     {
+
+        int? brandId = request.BrandId;
+        int? typeId = request.TypeId;
+
         return x => (!brandId.HasValue || x.ProductBrandId == brandId) &&
             (!typeId.HasValue || x.ProductTypeId == typeId);
     }
 
-    private static Func<IQueryable<Product>, IOrderedQueryable<Product>> BuildSortQuery(string sort)
+    private static Func<IQueryable<Product>, IOrderedQueryable<Product>> BuildSortQuery(ProductParams request)
     {
+        string sort = request.Sort;
         return sort switch
         {
             "priceAsc" => p => p.OrderBy(i => i.Price),

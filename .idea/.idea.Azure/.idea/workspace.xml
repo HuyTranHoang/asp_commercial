@@ -8,14 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1a3ef5f6-0ced-4223-9f20-3e36c5d27c82" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/api/Controllers/HandleErrorController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/Exceptions/ValidateInputError.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/Controllers/ProductsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Controllers/ProductsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/Extensions/ApplicationServiceExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Extensions/ApplicationServiceExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Program.cs" afterDir="false" />
-    </list>
+    <list default="true" id="1a3ef5f6-0ced-4223-9f20-3e36c5d27c82" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,7 +47,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "settings.editor.selected.configurable": "CSharpTypeNameHintsOptions",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -126,6 +119,8 @@
       <workItem from="1700585851468" duration="87000" />
       <workItem from="1700585956942" duration="141000" />
       <workItem from="1700641373413" duration="1200000" />
+      <workItem from="1700734555780" duration="633000" />
+      <workItem from="1700795711619" duration="818000" />
     </task>
     <servers />
   </component>
