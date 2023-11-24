@@ -1,6 +1,6 @@
 namespace api.Helpers.RequestQuery;
 
-public class PagingParams
+public class PaginationParams
 {
     private const int MaxPageSize = 20;
     public int PageNumber { get; set; } = 1;

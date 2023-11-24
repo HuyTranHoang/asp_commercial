@@ -27,7 +27,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         Expression<Func<T, bool>> filter = null,
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, // q => q.OrderBy(s => s.lastName)
         string includeProperties = "",
-        PagingParams pagingParams = null)
+        PaginationParams pagingParams = null)
     {
         IQueryable<T> query = _dbSet;
 

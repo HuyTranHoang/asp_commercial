@@ -22,8 +22,9 @@ public class ProductsController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts([FromQuery] ProductParams request,
-        [FromQuery] PagingParams pagingParams)
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts(
+        [FromQuery] ProductParams request,
+        [FromQuery] PaginationParams pagingParams)
     {
         var filter = BuildFilterExpression(request);
 
@@ -99,8 +100,10 @@ public class ProductsController : BaseApiController
 
         int? brandId = request.BrandId;
         int? typeId = request.TypeId;
+        string search = request.Search;
 
-        return x => (!brandId.HasValue || x.ProductBrandId == brandId) &&
+        return x => (string.IsNullOrEmpty(search) || x.Name.ToLower().Contains(search)) &&
+            (!brandId.HasValue || x.ProductBrandId == brandId) &&
             (!typeId.HasValue || x.ProductTypeId == typeId);
     }
 
