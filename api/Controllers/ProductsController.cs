@@ -28,7 +28,7 @@ public class ProductsController : BaseApiController
         var productDtos = await _unitOfWork.ProductRepository.GetDto<ProductDto>(
             BuildFilterExpression(request),
             BuildSortQuery(request),
-            "ProductType,ProductBrand",
+            SD.ProductIncludeTypeAndBrand,
             pagingParams);
 
         Response.AddPaginationHeader(new PaginationHeader(
@@ -40,8 +40,9 @@ public class ProductsController : BaseApiController
     [HttpGet("{id:int}")]
     public async Task<ActionResult<ProductDto>> GetProduct(int id)
     {
-        var query = await _unitOfWork.ProductRepository
-            .Get(p => p.Id == id, includeProperties: "ProductType,ProductBrand");
+        var query = await _unitOfWork.ProductRepository.Get(
+            filter: p => p.Id == id,
+            includeProperties: SD.ProductIncludeTypeAndBrand);
 
         var product = query.FirstOrDefault();
         if (product == null) return NotFound($"Product with id {id} not found");
