@@ -29,7 +29,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         _dbSet = _context.Set<T>();
     }
 
-    public async Task<IEnumerable<T>> GetAll()
+    public async Task<IEnumerable<T>> GetAllAsync()
     {
         return await _dbSet.ToListAsync();
     }
@@ -63,7 +63,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return query;
     }
 
-    public async Task<PagedList<T>> Get(
+    public async Task<PagedList<T>> GetAsync(
         Expression<Func<T, bool>> filter = null,
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
         string includeProperties = "",
@@ -73,7 +73,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return await PagedList<T>.CreateAsync(query, pagingParams.PageNumber, pagingParams.PageSize);
     }
 
-    public async Task<PagedList<TDto>> GetDto<TDto>(
+    public async Task<PagedList<TDto>> GetDtoAsync<TDto>(
         Expression<Func<T, bool>> filter = null,
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
         string includeProperties = "",
@@ -84,7 +84,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return await PagedList<TDto>.CreateAsync(projectedQuery, pagingParams.PageNumber, pagingParams.PageSize);
     }
 
-    public async Task<T> GetById(int id)
+    public async Task<T> GetByIdAsync(int id)
     {
         return await _dbSet.FindAsync(id);
     }

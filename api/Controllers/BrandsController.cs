@@ -15,14 +15,14 @@ public class BrandsController : BaseApiController
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ProductBrand>>> GetBrands()
     {
-        var brands = await _unitOfWork.ProductBrandRepository.GetAll();
+        var brands = await _unitOfWork.ProductBrandRepository.GetAllAsync();
         return Ok(brands);
     }
 
     [HttpGet("{id:int}")]
     public async Task<ActionResult<ProductBrand>> GetBrand(int id)
     {
-        var brand = await _unitOfWork.ProductBrandRepository.GetById(id);
+        var brand = await _unitOfWork.ProductBrandRepository.GetByIdAsync(id);
         if (brand == null) return NotFound($"Brand with id {id} not found");
 
         return Ok(brand);
@@ -42,7 +42,7 @@ public class BrandsController : BaseApiController
     [HttpPut("{id:int}")]
     public async Task<ActionResult<ProductBrand>> UpdateBrand(int id, ProductBrand brand)
     {
-        var existingBrand = await _unitOfWork.ProductBrandRepository.GetById(id);
+        var existingBrand = await _unitOfWork.ProductBrandRepository.GetByIdAsync(id);
         if (existingBrand == null) return NotFound($"Brand with id {id} not found");
 
         existingBrand.Name = brand.Name;
@@ -57,7 +57,7 @@ public class BrandsController : BaseApiController
     [HttpDelete("{id:int}")]
     public async Task<ActionResult> DeleteBrand(int id)
     {
-        var existingBrand = await _unitOfWork.ProductBrandRepository.GetById(id);
+        var existingBrand = await _unitOfWork.ProductBrandRepository.GetByIdAsync(id);
         if (existingBrand == null) return NotFound($"Brand with id {id} not found");
 
         _unitOfWork.ProductBrandRepository.Delete(existingBrand);

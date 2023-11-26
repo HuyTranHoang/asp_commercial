@@ -37,7 +37,7 @@ public class BuggyController : BaseApiController
     [HttpGet("server-error")]
     public async Task<IActionResult> GetServerError()
     {
-        var thing = await _unitOfWork.ProductRepository.GetById(9999);
+        var thing = await _unitOfWork.ProductRepository.GetByIdAsync(9999);
         var thingToReturn = thing.ToString();
         return Ok();
     }

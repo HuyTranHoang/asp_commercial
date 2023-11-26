@@ -15,14 +15,14 @@ public class TypesController : BaseApiController
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ProductType>>> GetTypes()
     {
-        var types = await _unitOfWork.ProductTypeRepository.GetAll();
+        var types = await _unitOfWork.ProductTypeRepository.GetAllAsync();
         return Ok(types);
     }
 
     [HttpGet("{id:int}")]
     public async Task<ActionResult<ProductType>> GetType(int id)
     {
-        var type = await _unitOfWork.ProductTypeRepository.GetById(id);
+        var type = await _unitOfWork.ProductTypeRepository.GetByIdAsync(id);
         if (type == null)
         {
             return NotFound($"Type with id {id} not found");
@@ -45,7 +45,7 @@ public class TypesController : BaseApiController
     [HttpPut("{id:int}")]
     public async Task<ActionResult<ProductType>> UpdateType(int id, ProductType type)
     {
-        var existingType = await _unitOfWork.ProductTypeRepository.GetById(id);
+        var existingType = await _unitOfWork.ProductTypeRepository.GetByIdAsync(id);
         if (existingType == null) return NotFound($"Type with id {id} not found");
 
         existingType.Name = type.Name;
@@ -60,7 +60,7 @@ public class TypesController : BaseApiController
     [HttpDelete("{id:int}")]
     public async Task<ActionResult<ProductType>> DeleteType(int id)
     {
-        var existingType = await _unitOfWork.ProductTypeRepository.GetById(id);
+        var existingType = await _unitOfWork.ProductTypeRepository.GetByIdAsync(id);
         if (existingType == null) return NotFound($"Type with id {id} not found");
 
         _unitOfWork.ProductTypeRepository.Delete(existingType);

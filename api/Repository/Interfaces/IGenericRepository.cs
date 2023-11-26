@@ -6,20 +6,20 @@ namespace api.Repository.Interfaces;
 
 public interface IGenericRepository<T> where T : class
 {
-    public Task<IEnumerable<T>> GetAll();
-    public Task<PagedList<T>> Get(
+    public Task<IEnumerable<T>> GetAllAsync();
+    public Task<PagedList<T>> GetAsync(
         Expression<Func<T, bool>> filter = null,
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, // q => q.OrderBy(s => s.lastName)
         string includeProperties = "",
         PaginationParams pagingParams = null);
 
-    public Task<PagedList<TDto>> GetDto<TDto>(
+    public Task<PagedList<TDto>> GetDtoAsync<TDto>(
         Expression<Func<T, bool>> filter = null,
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, // q => q.OrderBy(s => s.lastName)
         string includeProperties = "",
         PaginationParams pagingParams = null);
 
-    public Task<T> GetById(int id);
+    public Task<T> GetByIdAsync(int id);
     public void Create(T entity);
     public void Update(T entity);
     public void Delete(T entity);

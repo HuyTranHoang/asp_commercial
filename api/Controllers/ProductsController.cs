@@ -25,7 +25,7 @@ public class ProductsController : BaseApiController
         [FromQuery] ProductParams request,
         [FromQuery] PaginationParams pagingParams)
     {
-        var productDtos = await _unitOfWork.ProductRepository.GetDto<ProductDto>(
+        var productDtos = await _unitOfWork.ProductRepository.GetDtoAsync<ProductDto>(
             BuildFilterExpression(request),
             BuildSortQuery(request),
             SD.ProductIncludeTypeAndBrand,
@@ -40,7 +40,7 @@ public class ProductsController : BaseApiController
     [HttpGet("{id:int}")]
     public async Task<ActionResult<ProductDto>> GetProduct(int id)
     {
-        var query = await _unitOfWork.ProductRepository.Get(
+        var query = await _unitOfWork.ProductRepository.GetAsync(
             filter: p => p.Id == id,
             includeProperties: SD.ProductIncludeTypeAndBrand);
 
@@ -65,7 +65,7 @@ public class ProductsController : BaseApiController
     [HttpPut("{id:int}")]
     public async Task<ActionResult<Product>> UpdateProduct(int id, Product product)
     {
-        var existingProduct = await _unitOfWork.ProductRepository.GetById(id);
+        var existingProduct = await _unitOfWork.ProductRepository.GetByIdAsync(id);
         if (existingProduct == null) return NotFound($"Product with id {id} not found");
 
         _mapper.Map(product, existingProduct);
@@ -80,7 +80,7 @@ public class ProductsController : BaseApiController
     [HttpDelete("{id:int}")]
     public async Task<ActionResult> DeleteProduct(int id)
     {
-        var existingProduct = await _unitOfWork.ProductRepository.GetById(id);
+        var existingProduct = await _unitOfWork.ProductRepository.GetByIdAsync(id);
         if (existingProduct == null) return NotFound($"Product with id {id} not found");
 
         _unitOfWork.ProductRepository.Delete(existingProduct);
