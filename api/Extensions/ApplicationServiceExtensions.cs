@@ -22,6 +22,7 @@ public static class ApplicationServiceExtensions
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+        services.AddCors();
 
         services.Configure<ApiBehaviorOptions>(options =>
         {
