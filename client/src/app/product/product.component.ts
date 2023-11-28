@@ -40,6 +40,14 @@ export class ProductComponent implements OnInit {
   private loadProducts() {
     if (this.userParams) {
       let params = this.getPaginationHeaders(this.userParams.pageNumber, this.userParams.pageSize)
+      if (this.userParams.brandId !== 0) {
+        params = params.append('brandId', this.userParams.brandId)
+      }
+
+      if (this.userParams.typeId !== 0) {
+        params = params.append('typeId', this.userParams.typeId)
+      }
+
       params = params.append('orderBy', this.userParams.orderBy)
 
       this.getPaginatedResult<Product[]>(this.config.apiUrl + '/products', params).subscribe({
