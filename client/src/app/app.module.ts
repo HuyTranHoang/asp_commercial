@@ -9,8 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
-import { PaginationModule } from 'ngx-bootstrap/pagination'
-import { APP_CONFIG, APP_SERVICE_CONFIG } from '../_appconfig/appconfig.service'
+import { APP_CONFIG, APP_SERVICE_CONFIG } from '../_appconfig/appconfig.service';
+import { SharedModule } from './_modules/shared.module'
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { APP_CONFIG, APP_SERVICE_CONFIG } from '../_appconfig/appconfig.service'
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    PaginationModule.forRoot()
+    SharedModule
   ],
   providers: [
     { provide: APP_SERVICE_CONFIG, useValue: APP_CONFIG },
