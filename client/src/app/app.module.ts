@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
 import { APP_CONFIG, APP_SERVICE_CONFIG } from '../_appconfig/appconfig.service';
 import { SharedModule } from './_modules/shared.module'
+import { NgOptimizedImage } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -19,14 +20,15 @@ import { SharedModule } from './_modules/shared.module'
     HomeComponent,
     ProductComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    SharedModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormsModule,
+        SharedModule,
+        NgOptimizedImage
+    ],
   providers: [
     { provide: APP_SERVICE_CONFIG, useValue: APP_CONFIG },
   ],

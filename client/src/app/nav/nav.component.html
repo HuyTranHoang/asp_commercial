@@ -1,27 +1,43 @@
-<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-    <img src="/assets/images/logo.png" style="height: 50px" alt="">
-  </a>
+<div class="border-bottom py-3 mb-4 bg-light">
+  <header class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+    <div class="col-md-3 mb-2 mb-md-0">
+      <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+        <img src="assets/images/logoGura.png" alt="Gura logo" style="max-height: 40px">
+      </a>
+    </div>
 
-  <ul class="nav nav-pills">
-    <li class="nav-item">
-      <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-    </li>
-    <li class="nav-item">
-      <a routerLink="/products" class="nav-link" routerLinkActive="active">Products</a>
-    </li>
-    <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-    <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-    <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <li>
+        <a class="nav-link px-2"
+           routerLinkActive="link-info"
+           [routerLinkActiveOptions]="{ exact: true }"
+           routerLink="/"
+        >Home</a>
+      </li>
+      <li>
+        <a class="nav-link px-2"
+           routerLinkActive="link-info"
+           routerLink="/products"
+        >Products</a>
+      </li>
+      <li>
+        <a class="nav-link px-2">Pricing</a>
+      </li>
+      <li>
+        <a class="nav-link px-2">FAQs</a>
+      </li>
+      <li>
+        <a class="nav-link px-2">About</a>
+      </li>
+    </ul>
 
-    <li class="nav-item position-relative">
-      <fa-icon [icon]="faCartShopping" size="2x"></fa-icon>
-      <span class="cart-no">5</span>
-    </li>
-    <li class="nav-item"><a href="/login" class="btn btn-outline-primary me-2">Login</a></li>
-    <li class="nav-item"><a href="/register" class="btn btn-primary">Sign-up</a></li>
-  </ul>
-
-</header>
-
-
+    <div class="col-md-3 text-end d-flex">
+      <div class="position-relative flex-grow-1 me-3">
+        <fa-icon [icon]="faCartShopping" size="2x"></fa-icon>
+        <span class="cart-no">5</span>
+      </div>
+      <button type="button" class="btn btn-outline-primary me-2">Login</button>
+      <button type="button" class="btn btn-primary">Sign-up</button>
+    </div>
+  </header>
+</div>
