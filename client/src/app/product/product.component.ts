@@ -6,6 +6,7 @@ import { map } from 'rxjs'
 import { UserParams } from '../../_models/userParams'
 import { APP_SERVICE_CONFIG } from '../../_appconfig/appconfig.service'
 import { AppConfig } from '../../_appconfig/appconfig.interface'
+import { ProductService } from '../_services/product.service'
 
 @Component({
   selector: 'app-product',
@@ -17,19 +18,9 @@ export class ProductComponent implements OnInit {
   userParams: UserParams | undefined
   pagination: Pagination | undefined
 
-  constructor(private http: HttpClient, @Inject(APP_SERVICE_CONFIG) private config: AppConfig,) {
-    this.userParams = new UserParams()
-  }
-
-  getUserParams() {
-    return this.userParams
-  }
-
-  setUserParams(params: UserParams) {
-    this.userParams = params
-  }
-
-  resetUserParams() {
+  constructor(private http: HttpClient,
+              @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
+              private productService: ProductService) {
     this.userParams = new UserParams()
   }
 
@@ -38,63 +29,29 @@ export class ProductComponent implements OnInit {
   }
 
   private loadProducts() {
-    if (this.userParams) {
-      let params = this.getPaginationHeaders(this.userParams.pageNumber, this.userParams.pageSize)
-      if (this.userParams.brandId !== 0) {
-        params = params.append('brandId', this.userParams.brandId)
-      }
-
-      if (this.userParams.typeId !== 0) {
-        params = params.append('typeId', this.userParams.typeId)
-      }
-
-      params = params.append('orderBy', this.userParams.orderBy)
-
-      this.getPaginatedResult<Product[]>(this.config.apiUrl + '/products', params).subscribe({
+    if (this.userParams){
+      this.productService.setUserParams(this.userParams)
+      this.productService.getProducts(this.userParams).subscribe({
         next: response => {
-          if (response.result) {
+          if (response.result && response.pagination) {
             this.products = response.result
             this.pagination = response.pagination
           }
         },
-        error: error => {
-          console.log(error)
-        }
+        error: error => console.log(error)
       })
     }
   }
 
-  private getPaginatedResult<T>(url: string, params: HttpParams) {
-    const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>()
-
-    return this.http.get<T>(url, {observe: 'response', params}).pipe(
-      map(response => {
-        if (response.body) {
-          paginatedResult.result = response.body
-        }
-
-        const pagination = response.headers.get('Pagination')
-        if (pagination) {
-          paginatedResult.pagination = JSON.parse(pagination)
-        }
-        return paginatedResult
-      })
-    )
-  }
-
-  private getPaginationHeaders(pageNumber: number, pageSize: number) {
-    let params = new HttpParams()
-
-    params = params.append('pageNumber', pageNumber)
-    params = params.append('pageSize', pageSize)
-
-    return params
+  resetFilters() {
+    this.userParams = this.productService.resetUserParams()
+    this.loadProducts()
   }
 
   pageChanged(event: any) {
-    if(this.userParams && this.userParams.pageNumber !== event.page) {
+    if (this.userParams && this.userParams.pageNumber !== event.page) {
       this.userParams.pageNumber = event.page
-      this.setUserParams(this.userParams)
+      this.productService.setUserParams(this.userParams)
       this.loadProducts()
     }
   }
