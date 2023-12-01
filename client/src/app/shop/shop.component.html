@@ -2,15 +2,17 @@
   <div class="row">
     <section class="col-3">
 
-      <h5 class="text-info me-3 my-3">Brands</h5>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let brand of brands">{{brand.name}}</li>
-      </ul>
+      <app-filter-component [items]="brands"
+                            [title]="'Brands'"
+                            [selectedItemId]="userParams?.brandId ?? 0"
+                            (itemSelected)="onBrandSelected($event)">
+      </app-filter-component>
+      <app-filter-component [items]="types"
+                            [title]="'Types'"
+                            [selectedItemId]="userParams?.typeId ?? 0"
+                            (itemSelected)="onTypeSelected($event)">
+      </app-filter-component>
 
-      <h5 class="text-info me-3 my-3">Types</h5>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let type of types">{{type.name}}</li>
-      </ul>
     </section>
 
     <section class="col-9">
@@ -18,43 +20,48 @@
       <div class="d-flex justify-content-between">
         <div class="d-flex align-items-center">
           <h5 class="text-info my-3 me-3">Sort</h5>
-          <button class="btn btn-sm btn-outline-primary me-3">Alphabetical</button>
-          <select class="form-select form-select-sm" style="width: 300px">
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
+          <button class="btn btn-sm me-3"
+                  (click)="onSortSelected('name')"
+                  [ngClass]="userParams?.sort === 'name' ? 'btn-primary' : 'btn-outline-dark'"
+          >Alphabetical
+          </button>
+
+          <select class="form-select form-select-sm"
+                  [ngClass]="userParams?.sort != 'name' ? 'text-primary fw-bold' : ''" style="width: 300px">
+            <option *ngFor="let sort of sortList" [value]="sort.value" (click)="onSortSelected(sort.value)"
+                    class="text-body">
+              {{sort.display}}
+            </option>
           </select>
         </div>
 
-        <div class="d-flex align-items-center position-relative">
-          <fa-icon class="position-absolute" style="right: 5px" [icon]="faSearch"></fa-icon>
-          <input class="form-control form-control-sm" type="text" placeholder="Search...">
-        </div>
+        <form class="d-flex align-items-center" (ngSubmit)="onSearch()">
+          <div class="d-flex align-items-center position-relative">
+            <fa-icon class="position-absolute" style="right: 5px" [icon]="faSearch" (click)="onSearch()"
+                     [ngStyle]="{  'cursor': 'pointer'}"></fa-icon>
+            <input class="form-control form-control-sm" type="text" placeholder="Search..." [(ngModel)]="searchTerm" name="searchTerm">
+          </div>
+          <button class="btn btn-sm btn-danger">
+            <fa-icon [icon]="faRefresh" (click)="onResetSearch()"></fa-icon>
+          </button>
+        </form>
       </div>
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3" *ngIf="products">
-        <div class="col" *ngFor="let product of products">
-          <div class="card shadow-sm">
-            <img class="card-img-top" src="{{product.pictureUrl}}" alt="{{product.name}}">
-            <div class="card-body">
-              <p class="card-text">{{product.price | currency}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-primary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
-                </div>
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" *ngIf="products">
+        <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
+      </div>
 
+      <div class="mt-3" *ngIf="products.length <= 0">
+        <div class="alert alert-danger" role="alert">
+          No product was found!
+        </div>
       </div>
     </section>
   </div>
 </div>
 
 
-<div class="d-flex justify-content-center mt-3" *ngIf="pagination">
+<div class="d-flex justify-content-center mt-3" *ngIf="pagination && products.length > 0">
   <pagination [boundaryLinks]="true"
               [totalItems]="pagination.totalItems"
               [itemsPerPage]="pagination.itemsPerPage"

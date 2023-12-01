@@ -67,7 +67,11 @@ export class ShopService {
       params = params.append('typeId', userParams.typeId)
     }
 
-    params = params.append('orderBy', userParams.orderBy)
+    if (userParams.search) {
+      params = params.append('search', userParams.search)
+    }
+
+    params = params.append('sort', userParams.sort)
 
     return this.getPaginatedResult<Product[]>(this.config.apiUrl + '/products', params)
   }

@@ -1,0 +1,8 @@
+<h5 class="text-info me-3 my-3">{{title}}</h5>
+<ul class="list-group">
+  <li class="list-group-item"
+      *ngFor="let item of items"
+      (click)="onItemSelected(item.id)"
+      [ngClass]="selectedItemId === item.id ? 'active' : ''"
+  >{{item.name}}</li>
+</ul>

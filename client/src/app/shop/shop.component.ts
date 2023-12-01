@@ -22,6 +22,9 @@ export class ShopComponent implements OnInit {
   faRefresh = faRefresh
   faSearch = faSearch
 
+  sortList = [{value: 'priceAsc', display: 'Price: Low to High'}, {value: 'priceDesc', display: 'Price: High to Low'}]
+  searchTerm = ''
+
   products: Product[] = []
   brands: Brand[] = []
   types: Type[] = []
@@ -48,7 +51,6 @@ export class ShopComponent implements OnInit {
           if (response.result && response.pagination) {
             this.products = response.result
             this.pagination = response.pagination
-            console.log(this.pagination)
           }
         },
         error: err => console.log(err)
@@ -85,6 +87,44 @@ export class ShopComponent implements OnInit {
       this.shopService.setUserParams(this.userParams)
       this.loadProducts()
     }
+  }
+
+  onBrandSelected(brandId: number) {
+    if(this.userParams && this.userParams.brandId !== brandId) {
+      this.userParams.brandId = brandId
+      this.userParams.pageNumber = 1
+      this.shopService.setUserParams(this.userParams)
+      this.loadProducts()
+    }
+  }
+
+  onTypeSelected(typeId: number) {
+    if(this.userParams && this.userParams.typeId !== typeId) {
+      this.userParams.typeId = typeId
+      this.userParams.pageNumber = 1
+      this.shopService.setUserParams(this.userParams)
+      this.loadProducts()
+    }
+  }
+
+  onSortSelected(sort: string) {
+    if(this.userParams && this.userParams.sort !== sort) {
+      this.userParams.sort = sort
+      this.userParams.pageNumber = 1
+      this.shopService.setUserParams(this.userParams)
+      this.loadProducts()
+    }
+  }
+
+  onSearch() {
+    this.userParams = this.shopService.resetUserParams()
+    this.userParams.search = this.searchTerm
+    this.loadProducts()
+  }
+
+  onResetSearch() {
+    this.searchTerm = ''
+    this.onSearch()
   }
 
 }

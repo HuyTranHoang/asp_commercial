@@ -3,5 +3,6 @@ export class UserParams {
   pageSize = 6
   brandId = 0
   typeId = 0
-  orderBy = 'name'
+  sort = 'name'
+  search = ''
 }
