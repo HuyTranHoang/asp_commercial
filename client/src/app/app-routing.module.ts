@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductComponent } from './product/product.component'
 import { HomeComponent } from './home/home.component'
 
 const routes: Routes = [
-  { path: 'products', component: ProductComponent },
-  { path: 'products/:id', component: ProductComponent },
   { path: '', component: HomeComponent, pathMatch: 'full'},
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
