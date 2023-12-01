@@ -1,11 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { HttpClient, HttpParams } from '@angular/common/http'
-import { Product } from '../../_models/product'
-import { PaginatedResult, Pagination } from '../../_models/pagination'
+import { Product } from '../_models/product'
+import { PaginatedResult, Pagination } from '../_models/pagination'
 import { map } from 'rxjs'
-import { UserParams } from '../../_models/userParams'
-import { APP_SERVICE_CONFIG } from '../../_appconfig/appconfig.service'
-import { AppConfig } from '../../_appconfig/appconfig.interface'
+import { UserParams } from '../_models/userParams'
+import { APP_SERVICE_CONFIG } from '../_appconfig/appconfig.service'
+import { AppConfig } from '../_appconfig/appconfig.interface'
 import { ProductService } from '../_services/product.service'
 
 @Component({

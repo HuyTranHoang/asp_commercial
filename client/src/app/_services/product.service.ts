@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@angular/core'
 import { HttpClient, HttpParams } from '@angular/common/http'
-import { APP_SERVICE_CONFIG } from '../../_appconfig/appconfig.service'
-import { AppConfig } from '../../_appconfig/appconfig.interface'
-import { UserParams } from '../../_models/userParams'
-import { PaginatedResult, Pagination } from '../../_models/pagination'
-import { Product } from '../../_models/product'
+import { APP_SERVICE_CONFIG } from '../_appconfig/appconfig.service'
+import { AppConfig } from '../_appconfig/appconfig.interface'
+import { UserParams } from '../_models/userParams'
+import { PaginatedResult, Pagination } from '../_models/pagination'
+import { Product } from '../_models/product'
 import { map } from 'rxjs'
 
 @Injectable({

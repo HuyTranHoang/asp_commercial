@@ -9,9 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
-import { APP_CONFIG, APP_SERVICE_CONFIG } from '../_appconfig/appconfig.service';
+import { APP_CONFIG, APP_SERVICE_CONFIG } from './_appconfig/appconfig.service';
 import { SharedModule } from './_modules/shared.module'
 import { NgOptimizedImage } from '@angular/common'
+import { ShopModule } from './shop/shop.module'
 
 @NgModule({
   declarations: [
@@ -20,15 +21,16 @@ import { NgOptimizedImage } from '@angular/common'
     HomeComponent,
     ProductComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        FormsModule,
-        SharedModule,
-        NgOptimizedImage
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    NgOptimizedImage,
+    SharedModule,
+    ShopModule
+  ],
   providers: [
     { provide: APP_SERVICE_CONFIG, useValue: APP_CONFIG },
   ],

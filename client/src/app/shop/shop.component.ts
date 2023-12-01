@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { APP_SERVICE_CONFIG } from '../_appconfig/appconfig.service'
-import { AppConfig } from '../_appconfig/appconfig.interface'
+import { Component, OnInit } from '@angular/core'
+import { ShopService } from './shop.service'
+import { faRefresh, faSearch} from '@fortawesome/free-solid-svg-icons'
+import { Product } from '../_models/product'
 
 @Component({
   selector: 'app-shop',
@@ -9,12 +9,15 @@ import { AppConfig } from '../_appconfig/appconfig.interface'
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
-  products: any[] = []
+  faRefresh = faRefresh
+  faSearch = faSearch
 
-  constructor(private http: HttpClient, @Inject(APP_SERVICE_CONFIG) private config: AppConfig) { }
+  products: Product[] = []
+
+  constructor(private shopService: ShopService) { }
 
   ngOnInit(): void {
-    this.http.get(this.config.apiUrl + '/products').subscribe({
+    this.shopService.getProducts().subscribe({
       next: (response: any) => {
         this.products = response
       },
