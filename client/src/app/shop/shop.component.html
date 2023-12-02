@@ -1,25 +1,24 @@
 <div class="container">
   <div class="row">
-    <section class="col-3">
-
+    <section class="col-3 bg-body-secondary rounded p-3">
       <app-filter-component [items]="brands"
-                            [title]="'Brands'"
+                            [title]="'Brand'"
                             [selectedItemId]="userParams?.brandId ?? 0"
                             (itemSelected)="onBrandSelected($event)">
       </app-filter-component>
+
       <app-filter-component [items]="types"
-                            [title]="'Types'"
+                            [title]="'Type'"
                             [selectedItemId]="userParams?.typeId ?? 0"
                             (itemSelected)="onTypeSelected($event)">
       </app-filter-component>
-
     </section>
 
     <section class="col-9">
 
       <div class="d-flex justify-content-between">
         <div class="d-flex align-items-center">
-          <h5 class="text-info my-3 me-3">Sort</h5>
+          <h5 class="text-info my-3 me-3 filter-label">Sort</h5>
           <button class="btn btn-sm me-3"
                   (click)="onSortSelected('name')"
                   [ngClass]="userParams?.sort === 'name' ? 'btn-primary' : 'btn-outline-dark'"

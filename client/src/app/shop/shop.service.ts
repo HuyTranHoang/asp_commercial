@@ -6,6 +6,8 @@ import { map } from 'rxjs'
 import { Product } from '../_models/product'
 import { UserParams } from '../_models/userParams'
 import { PaginatedResult, Pagination } from '../_models/pagination'
+import { Brand } from '../_models/brand'
+import { Type } from '../_models/type'
 
 @Injectable({
   providedIn: 'root'
@@ -81,11 +83,11 @@ export class ShopService {
   }
 
   getBrands() {
-    return this.http.get<[]>(this.config.apiUrl + '/brands')
+    return this.http.get<Brand[]>(this.config.apiUrl + '/brands')
   }
 
   getTypes() {
-    return this.http.get<[]>(this.config.apiUrl + '/types')
+    return this.http.get<Type[]>(this.config.apiUrl + '/types')
   }
 
 }
