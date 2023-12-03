@@ -8,10 +8,6 @@ import { Type }                      from '../_models/type'
 import { Product }                   from '../_models/product'
 import { Pagination }                from '../_models/pagination'
 import { Brand }                     from '../_models/brand'
-
-import { APP_SERVICE_CONFIG }        from '../_appconfig/appconfig.service'
-import { AppConfig }                 from '../_appconfig/appconfig.interface'
-
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
@@ -34,10 +30,7 @@ export class ShopComponent implements OnInit {
   pagination: Pagination | undefined
   userParams: UserParams | undefined
 
-  constructor(
-    @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
-    private shopService: ShopService
-  ) {
+  constructor(private shopService: ShopService) {
     this.userParams = shopService.getUserParams()
   }
 
