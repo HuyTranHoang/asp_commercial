@@ -1,16 +1,17 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule }        from '@angular/platform-browser/animations'
+import { BrowserModule }                  from '@angular/platform-browser'
+import { NgModule }                       from '@angular/core'
+import { HttpClientModule }               from '@angular/common/http'
+import { NgOptimizedImage }               from '@angular/common'
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NavComponent } from './nav/nav.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './home/home.component';
-import { HttpClientModule } from '@angular/common/http'
-import { APP_CONFIG, APP_SERVICE_CONFIG } from './_appconfig/appconfig.service';
-import { SharedModule } from './_modules/shared.module'
-import { NgOptimizedImage } from '@angular/common'
-import { ShopModule } from './shop/shop.module'
+import { ShopModule }                     from './shop/shop.module'
+import { NavComponent }                   from './nav/nav.component'
+import { HomeComponent }                  from './home/home.component'
+import { AppComponent }                   from './app.component'
+import { AppRoutingModule }               from './app-routing.module'
+
+import { SharedModule }                   from './_modules/shared.module'
+import { APP_CONFIG, APP_SERVICE_CONFIG } from './_appconfig/appconfig.service'
 
 @NgModule({
   declarations: [

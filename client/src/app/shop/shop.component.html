@@ -1,17 +1,17 @@
 <div class="container">
   <div class="row">
     <section class="col-3 bg-body-secondary rounded p-3">
-      <app-filter-component [items]="brands"
-                            [title]="'Brand'"
-                            [selectedItemId]="userParams?.brandId ?? 0"
-                            (itemSelected)="onBrandSelected($event)">
-      </app-filter-component>
+      <app-filter [items]="brands"
+                  [title]="'Brand'"
+                  [selectedItemId]="userParams?.brandId ?? 0"
+                  (itemSelected)="onBrandSelected($event)">
+      </app-filter>
 
-      <app-filter-component [items]="types"
-                            [title]="'Type'"
-                            [selectedItemId]="userParams?.typeId ?? 0"
-                            (itemSelected)="onTypeSelected($event)">
-      </app-filter-component>
+      <app-filter [items]="types"
+                  [title]="'Type'"
+                  [selectedItemId]="userParams?.typeId ?? 0"
+                  (itemSelected)="onTypeSelected($event)">
+      </app-filter>
     </section>
 
     <section class="col-9">
@@ -26,7 +26,8 @@
           </button>
 
           <select class="form-select form-select-sm"
-                  [ngClass]="userParams?.sort != 'name' ? 'text-primary fw-bold' : ''" style="width: 300px">
+                  [ngClass]="userParams?.sort != 'name' ? 'text-primary fw-bold' : ''"
+                  style="width: 300px">
             <option *ngFor="let sort of sortList" [value]="sort.value" (click)="onSortSelected(sort.value)"
                     class="text-body">
               {{sort.display}}
@@ -37,7 +38,7 @@
         <form class="d-flex align-items-center" (ngSubmit)="onSearch()">
           <div class="d-flex align-items-center position-relative">
             <fa-icon class="position-absolute" style="right: 5px" [icon]="faSearch" (click)="onSearch()"
-                     [ngStyle]="{  'cursor': 'pointer'}"></fa-icon>
+                    [ngStyle]="{  'cursor': 'pointer'}"></fa-icon>
             <input class="form-control form-control-sm" type="text" placeholder="Search..." [(ngModel)]="searchTerm" name="searchTerm">
           </div>
           <button class="btn btn-sm btn-danger">

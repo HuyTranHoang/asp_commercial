@@ -1,13 +1,16 @@
-import { Inject, Injectable } from '@angular/core'
+import { map }                    from 'rxjs'
+
+import { Inject, Injectable }     from '@angular/core'
 import { HttpClient, HttpParams } from '@angular/common/http'
-import { APP_SERVICE_CONFIG } from '../_appconfig/appconfig.service'
-import { AppConfig } from '../_appconfig/appconfig.interface'
-import { map } from 'rxjs'
-import { Product } from '../_models/product'
-import { UserParams } from '../_models/userParams'
-import { PaginatedResult, Pagination } from '../_models/pagination'
-import { Brand } from '../_models/brand'
-import { Type } from '../_models/type'
+
+import { UserParams }             from '../_models/userParams'
+import { Type }                   from '../_models/type'
+import { Product }                from '../_models/product'
+import { PaginatedResult }        from '../_models/pagination'
+import { Brand }                  from '../_models/brand'
+
+import { APP_SERVICE_CONFIG }     from '../_appconfig/appconfig.service'
+import { AppConfig }              from '../_appconfig/appconfig.interface'
 
 @Injectable({
   providedIn: 'root'

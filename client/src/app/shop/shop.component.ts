@@ -1,17 +1,16 @@
+import { faRefresh, faSearch }       from '@fortawesome/free-solid-svg-icons'
 import { Component, Inject, OnInit } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
 
-import { faRefresh, faSearch } from '@fortawesome/free-solid-svg-icons'
-import { APP_SERVICE_CONFIG } from '../_appconfig/appconfig.service'
-import { AppConfig } from '../_appconfig/appconfig.interface'
+import { ShopService }               from './shop.service'
 
-import { ShopService } from './shop.service'
+import { UserParams }                from '../_models/userParams'
+import { Type }                      from '../_models/type'
+import { Product }                   from '../_models/product'
+import { Pagination }                from '../_models/pagination'
+import { Brand }                     from '../_models/brand'
 
-import { Product } from '../_models/product'
-import { UserParams } from '../_models/userParams'
-import { Pagination } from '../_models/pagination'
-import { Brand } from '../_models/brand'
-import { Type } from '../_models/type'
+import { APP_SERVICE_CONFIG }        from '../_appconfig/appconfig.service'
+import { AppConfig }                 from '../_appconfig/appconfig.interface'
 
 @Component({
   selector: 'app-shop',
@@ -22,7 +21,10 @@ export class ShopComponent implements OnInit {
   faRefresh = faRefresh
   faSearch = faSearch
 
-  sortList = [{value: 'priceAsc', display: 'Price: Low to High'}, {value: 'priceDesc', display: 'Price: High to Low'}]
+  sortList = [
+    {value: 'priceAsc', display: 'Price: Low to High'},
+    {value: 'priceDesc', display: 'Price: High to Low'}
+  ]
   searchTerm = ''
 
   products: Product[] = []
@@ -31,9 +33,11 @@ export class ShopComponent implements OnInit {
 
   pagination: Pagination | undefined
   userParams: UserParams | undefined
-  constructor(private http: HttpClient,
-              @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
-              private shopService: ShopService) {
+
+  constructor(
+    @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
+    private shopService: ShopService
+  ) {
     this.userParams = shopService.getUserParams()
   }
 
@@ -44,35 +48,35 @@ export class ShopComponent implements OnInit {
   }
 
   loadProducts() {
-    if (this.userParams){
+    if (this.userParams) {
       this.shopService.setUserParams(this.userParams)
       this.shopService.getProducts(this.userParams).subscribe({
-        next: response => {
+        next: (response) => {
           if (response.result && response.pagination) {
             this.products = response.result
             this.pagination = response.pagination
           }
         },
-        error: err => console.log(err)
+        error: (err) => console.log(err)
       })
     }
   }
 
   loadBrands() {
     this.shopService.getBrands().subscribe({
-      next: response => {
+      next: (response) => {
         this.brands = [{id: 0, name: 'All'}, ...response]
       },
-      error: err => console.log(err)
+      error: (err) => console.log(err)
     })
   }
 
   loadTypes() {
     this.shopService.getTypes().subscribe({
-      next: response => {
+      next: (response) => {
         this.types = [{id: 0, name: 'All'}, ...response]
       },
-      error: err => console.log(err)
+      error: (err) => console.log(err)
     })
   }
 
@@ -82,7 +86,7 @@ export class ShopComponent implements OnInit {
   }
 
   pageChanged(event: any) {
-    if(this.userParams && this.userParams.pageNumber !== event.page) {
+    if (this.userParams && this.userParams.pageNumber !== event.page) {
       this.userParams.pageNumber = event.page
       this.shopService.setUserParams(this.userParams)
       this.loadProducts()
@@ -90,7 +94,7 @@ export class ShopComponent implements OnInit {
   }
 
   onBrandSelected(brandId: number) {
-    if(this.userParams && this.userParams.brandId !== brandId) {
+    if (this.userParams && this.userParams.brandId !== brandId) {
       this.userParams.brandId = brandId
       this.userParams.pageNumber = 1
       this.shopService.setUserParams(this.userParams)
@@ -99,7 +103,7 @@ export class ShopComponent implements OnInit {
   }
 
   onTypeSelected(typeId: number) {
-    if(this.userParams && this.userParams.typeId !== typeId) {
+    if (this.userParams && this.userParams.typeId !== typeId) {
       this.userParams.typeId = typeId
       this.userParams.pageNumber = 1
       this.shopService.setUserParams(this.userParams)
@@ -108,7 +112,7 @@ export class ShopComponent implements OnInit {
   }
 
   onSortSelected(sort: string) {
-    if(this.userParams && this.userParams.sort !== sort) {
+    if (this.userParams && this.userParams.sort !== sort) {
       this.userParams.sort = sort
       this.userParams.pageNumber = 1
       this.shopService.setUserParams(this.userParams)
@@ -126,5 +130,4 @@ export class ShopComponent implements OnInit {
     this.searchTerm = ''
     this.onSearch()
   }
-
 }
