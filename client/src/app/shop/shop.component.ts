@@ -1,13 +1,16 @@
-import { faRefresh, faSearch }       from '@fortawesome/free-solid-svg-icons'
-import { Component, Inject, OnInit } from '@angular/core'
+import { faSearch, faRefresh } from '@fortawesome/free-solid-svg-icons'
 
-import { ShopService }               from './shop.service'
+import { Component, OnInit } from '@angular/core'
 
-import { UserParams }                from '../_models/userParams'
-import { Type }                      from '../_models/type'
-import { Product }                   from '../_models/product'
-import { Pagination }                from '../_models/pagination'
-import { Brand }                     from '../_models/brand'
+import { ShopService } from './shop.service'
+
+import { UserParams } from '../_models/userParams'
+import { Type } from '../_models/type'
+import { Product } from '../_models/product'
+import { Pagination } from '../_models/pagination'
+import { Brand } from '../_models/brand'
+import { Observable } from 'rxjs'
+
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
@@ -18,14 +21,16 @@ export class ShopComponent implements OnInit {
   faSearch = faSearch
 
   sortList = [
+    {value: 'name', display: 'Name: A to Z'},
     {value: 'priceAsc', display: 'Price: Low to High'},
     {value: 'priceDesc', display: 'Price: High to Low'}
   ]
+
   searchTerm = ''
 
   products: Product[] = []
-  brands: Brand[] = []
-  types: Type[] = []
+  brands$: Observable<Brand[]> | undefined
+  types$: Observable<Type[]> | undefined
 
   pagination: Pagination | undefined
   userParams: UserParams | undefined
@@ -36,8 +41,10 @@ export class ShopComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProducts()
-    this.loadBrands()
-    this.loadTypes()
+
+    this.brands$ = this.shopService.getBrands()
+    this.types$ = this.shopService.getTypes()
+    this.shopService.initBrandAndType()
   }
 
   loadProducts() {
@@ -53,24 +60,6 @@ export class ShopComponent implements OnInit {
         error: (err) => console.log(err)
       })
     }
-  }
-
-  loadBrands() {
-    this.shopService.getBrands().subscribe({
-      next: (response) => {
-        this.brands = [{id: 0, name: 'All'}, ...response]
-      },
-      error: (err) => console.log(err)
-    })
-  }
-
-  loadTypes() {
-    this.shopService.getTypes().subscribe({
-      next: (response) => {
-        this.types = [{id: 0, name: 'All'}, ...response]
-      },
-      error: (err) => console.log(err)
-    })
   }
 
   resetFilters() {

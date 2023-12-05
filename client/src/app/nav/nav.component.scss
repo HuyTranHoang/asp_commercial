@@ -2,7 +2,7 @@
   position: absolute;
   top: -12px;
   right: -10px;
-  background-color: red;
+  background-color: #593196;
   color: white;
   padding: 0 5px;
   border-radius: 50%;
@@ -15,4 +15,9 @@
   justify-content: center;
   align-items: center;
   z-index: 1;
+}
+
+a {
+  font-family: 'Poppins', sans-serif;
+  color: gray;
 }

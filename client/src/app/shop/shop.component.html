@@ -1,33 +1,27 @@
 <div class="container">
-  <div class="row">
+  <div class="row gap-3">
     <section class="col-3 bg-body-secondary rounded p-3">
-      <app-filter [items]="brands"
+      <app-filter *ngIf="brands$ | async as brands"
+                  [items]="brands"
                   [title]="'Brand'"
                   [selectedItemId]="userParams?.brandId ?? 0"
                   (itemSelected)="onBrandSelected($event)">
       </app-filter>
 
-      <app-filter [items]="types"
+      <app-filter *ngIf="types$ | async as types"
+                  [items]="types"
                   [title]="'Type'"
                   [selectedItemId]="userParams?.typeId ?? 0"
                   (itemSelected)="onTypeSelected($event)">
       </app-filter>
     </section>
 
-    <section class="col-9">
+    <section class="col bg-body-secondary rounded">
 
       <div class="d-flex justify-content-between">
         <div class="d-flex align-items-center">
-          <h5 class="text-info my-3 me-3 filter-label">Sort</h5>
-          <button class="btn btn-sm me-3"
-                  (click)="onSortSelected('name')"
-                  [ngClass]="userParams?.sort === 'name' ? 'btn-primary' : 'btn-outline-dark'"
-          >Alphabetical
-          </button>
-
-          <select class="form-select form-select-sm"
-                  [ngClass]="userParams?.sort != 'name' ? 'text-primary fw-bold' : ''"
-                  style="width: 300px">
+          <h5 class="text-primary my-3 me-3 filter-label">Sort</h5>
+          <select class="form-select form-select-sm" style="width: 300px">
             <option *ngFor="let sort of sortList" [value]="sort.value" (click)="onSortSelected(sort.value)"
                     class="text-body">
               {{sort.display}}
@@ -36,14 +30,14 @@
         </div>
 
         <form class="d-flex align-items-center" (ngSubmit)="onSearch()">
+          <button class="btn btn-sm me-3" style="background: #593196">
+            <fa-icon [icon]="faRefresh" (click)="onResetSearch()" [style.color]="'#fff'" ></fa-icon>
+          </button>
           <div class="d-flex align-items-center position-relative">
             <fa-icon class="position-absolute" style="right: 5px" [icon]="faSearch" (click)="onSearch()"
                     [ngStyle]="{  'cursor': 'pointer'}"></fa-icon>
             <input class="form-control form-control-sm" type="text" placeholder="Search..." [(ngModel)]="searchTerm" name="searchTerm">
           </div>
-          <button class="btn btn-sm btn-danger">
-            <fa-icon [icon]="faRefresh" (click)="onResetSearch()"></fa-icon>
-          </button>
         </form>
       </div>
 
