@@ -65,11 +65,11 @@ export class ShopService {
 
   getProducts(userParams: UserParams) {
     let params = this.getPaginationHeaders(userParams.pageNumber, userParams.pageSize)
-    if (userParams.brandId !== 0) {
+    if (userParams.brandId) {
       params = params.append('brandId', userParams.brandId)
     }
 
-    if (userParams.typeId !== 0) {
+    if (userParams.typeId) {
       params = params.append('typeId', userParams.typeId)
     }
 
@@ -87,11 +87,11 @@ export class ShopService {
   }
 
   getBrands() {
-    return this.http.get<Brand[]>(this.config.apiUrl + '/products/brands')
+    return this.http.get<Brand[]>(this.config.apiUrl + '/brands')
   }
 
   getTypes() {
-    return this.http.get<Type[]>(this.config.apiUrl + '/products/types')
+    return this.http.get<Type[]>(this.config.apiUrl + '/types')
   }
 
 }

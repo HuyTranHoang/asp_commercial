@@ -1,15 +1,13 @@
 <div class="container">
   <div class="row gap-3">
     <section class="col-3 bg-body-secondary rounded p-3">
-      <app-filter *ngIf="brands$ | async as brands"
-                  [items]="brands"
+      <app-filter [items]="brands"
                   [title]="'Brand'"
                   [selectedItemId]="userParams?.brandId ?? 0"
                   (itemSelected)="onBrandSelected($event)">
       </app-filter>
 
-      <app-filter *ngIf="types$ | async as types"
-                  [items]="types"
+      <app-filter [items]="types"
                   [title]="'Type'"
                   [selectedItemId]="userParams?.typeId ?? 0"
                   (itemSelected)="onTypeSelected($event)">
@@ -53,7 +51,6 @@
     </section>
   </div>
 </div>
-
 
 <div class="d-flex justify-content-center mt-3" *ngIf="pagination && products.length > 0">
   <pagination [boundaryLinks]="true"
