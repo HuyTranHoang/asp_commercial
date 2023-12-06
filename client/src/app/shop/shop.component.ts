@@ -9,7 +9,6 @@ import { Type } from '../_models/type'
 import { Product } from '../_models/product'
 import { Pagination } from '../_models/pagination'
 import { Brand } from '../_models/brand'
-import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-shop',
@@ -29,8 +28,8 @@ export class ShopComponent implements OnInit {
   searchTerm = ''
 
   products: Product[] = []
-  brands$: Observable<Brand[]> | undefined
-  types$: Observable<Type[]> | undefined
+  brands: Brand[] = []
+  types: Type[] = []
 
   pagination: Pagination | undefined
   userParams: UserParams | undefined
@@ -41,10 +40,8 @@ export class ShopComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProducts()
-
-    this.brands$ = this.shopService.getBrands()
-    this.types$ = this.shopService.getTypes()
-    this.shopService.initBrandAndType()
+    this.loadBrands()
+    this.loadTypes()
   }
 
   loadProducts() {
@@ -60,6 +57,24 @@ export class ShopComponent implements OnInit {
         error: (err) => console.log(err)
       })
     }
+  }
+
+  loadBrands() {
+    this.shopService.getBrands().subscribe({
+      next: (response) => {
+        this.brands = [{id: 0, name: 'All'}, ...response]
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
+  loadTypes() {
+    this.shopService.getTypes().subscribe({
+      next: (response) => {
+        this.types = [{id: 0, name: 'All'}, ...response]
+      },
+      error: (err) => console.log(err)
+    })
   }
 
   resetFilters() {

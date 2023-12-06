@@ -1,4 +1,4 @@
-import { BehaviorSubject, map } from 'rxjs'
+import { map } from 'rxjs'
 
 import { Inject, Injectable } from '@angular/core'
 import { HttpClient, HttpParams } from '@angular/common/http'
@@ -16,8 +16,6 @@ import { AppConfig } from '../_appconfig/appconfig.interface'
   providedIn: 'root'
 })
 export class ShopService {
-  private brands$ = new BehaviorSubject<Brand[]>([])
-  private types$ = new BehaviorSubject<Type[]>([])
   userParams: UserParams | undefined
 
   constructor(private http: HttpClient, @Inject(APP_SERVICE_CONFIG) private config: AppConfig) {
@@ -88,29 +86,12 @@ export class ShopService {
     return this.http.get<Product>(this.config.apiUrl + '/products/' + id)
   }
 
-
-  initBrandAndType() {
-    this.http.get<Brand[]>(this.config.apiUrl + '/brands')
-      .pipe(map(response => [{id: 0, name: 'All'}, ...response]))
-      .subscribe({
-        next: response => this.brands$.next(response),
-        error: err => console.log(err)
-      })
-
-    this.http.get<Type[]>(this.config.apiUrl + '/types')
-      .pipe(map(response => [{id: 0, name: 'All'}, ...response]))
-      .subscribe({
-        next: response => this.types$.next(response),
-        error: err => console.log(err)
-      })
-  }
-
   getBrands() {
-    return this.brands$.asObservable()
+    return this.http.get<Brand[]>(this.config.apiUrl + '/products/brands')
   }
 
   getTypes() {
-    return this.types$.asObservable()
+    return this.http.get<Type[]>(this.config.apiUrl + '/products/types')
   }
 
 }
