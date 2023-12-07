@@ -70,7 +70,13 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         PaginationParams pagingParams = null)
     {
         var query = PrepareQuery(filter, orderBy, includeProperties);
-        return await PagedList<T>.CreateAsync(query, pagingParams.PageNumber, pagingParams.PageSize);
+
+        if (pagingParams != null)
+        {
+            return await PagedList<T>.CreateAsync(query, pagingParams.PageNumber, pagingParams.PageSize);
+        }
+
+        return await PagedList<T>.CreateAsync(query, 1, await query.CountAsync());
     }
 
     public async Task<PagedList<TDto>> GetDtoAsync<TDto>(
@@ -81,7 +87,13 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         var query = PrepareQuery(filter, orderBy, includeProperties);
         var projectedQuery = query.ProjectTo<TDto>(_mapper.ConfigurationProvider);
-        return await PagedList<TDto>.CreateAsync(projectedQuery, pagingParams.PageNumber, pagingParams.PageSize);
+
+        if (pagingParams != null)
+        {
+            return await PagedList<TDto>.CreateAsync(projectedQuery, pagingParams.PageNumber, pagingParams.PageSize);
+        }
+
+        return await PagedList<TDto>.CreateAsync(projectedQuery, 1, await projectedQuery.CountAsync());
     }
 
     public async Task<T> GetByIdAsync(int id)

@@ -1,6 +1,6 @@
 namespace api.Helpers.RequestQuery;
 
-public class ProductParams
+public class ProductParams : PaginationParams
 {
     public string Sort { get; set; }
     public int? BrandId { get; set; }

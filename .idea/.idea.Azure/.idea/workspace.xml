@@ -8,7 +8,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1a3ef5f6-0ced-4223-9f20-3e36c5d27c82" name="Changes" comment="" />
+    <list default="true" id="1a3ef5f6-0ced-4223-9f20-3e36c5d27c82" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/api/Controllers/ProductsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Controllers/ProductsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Extensions/ApplicationServiceExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Extensions/ApplicationServiceExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Helpers/RequestQuery/ProductParams.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Helpers/RequestQuery/ProductParams.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Repository/GenericRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Repository/GenericRepository.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,7 +52,8 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CSharpTypeNameHintsOptions&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -121,6 +127,27 @@
       <workItem from="1700641373413" duration="1200000" />
       <workItem from="1700734555780" duration="633000" />
       <workItem from="1700795711619" duration="818000" />
+      <workItem from="1701638894197" duration="31000" />
+      <workItem from="1701638946257" duration="167000" />
+      <workItem from="1701781895945" duration="21000" />
+      <workItem from="1701781934190" duration="231000" />
+      <workItem from="1701790612705" duration="13000" />
+      <workItem from="1701799106611" duration="105000" />
+      <workItem from="1701927465659" duration="120000" />
+      <workItem from="1701927790497" duration="70000" />
+      <workItem from="1701927876059" duration="45000" />
+      <workItem from="1701927935287" duration="197000" />
+      <workItem from="1701928147756" duration="50000" />
+      <workItem from="1701928212531" duration="149000" />
+      <workItem from="1701928383938" duration="27000" />
+      <workItem from="1701928424582" duration="120000" />
+      <workItem from="1701928795821" duration="29000" />
+      <workItem from="1701928837364" duration="66000" />
+      <workItem from="1701928912291" duration="37000" />
+      <workItem from="1701929646440" duration="42000" />
+      <workItem from="1701929700598" duration="619000" />
+      <workItem from="1701930916732" duration="7000" />
+      <workItem from="1701946061662" duration="637000" />
     </task>
     <servers />
   </component>

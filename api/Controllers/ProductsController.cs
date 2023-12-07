@@ -21,20 +21,16 @@ public class ProductsController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts(
-        [FromQuery] ProductParams request,
-        [FromQuery] PaginationParams pagingParams)
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts([FromQuery] ProductParams request)
     {
-        var products = await _unitOfWork.ProductRepository.GetAsync(
+        var productDtos = await _unitOfWork.ProductRepository.GetDtoAsync<ProductDto>(
             BuildFilterExpression(request),
             BuildSortQuery(request),
             SD.ProductIncludeTypeAndBrand,
-            pagingParams);
-
-        var productDtos = _mapper.Map<IEnumerable<ProductDto>>(products);
+            request);
 
         Response.AddPaginationHeader(new PaginationHeader(
-            pagingParams.PageNumber, pagingParams.PageSize, products.TotalCount, products.TotalPages));
+            request.PageNumber, request.PageSize, productDtos.TotalCount, productDtos.TotalPages));
 
         return Ok(productDtos);
     }
