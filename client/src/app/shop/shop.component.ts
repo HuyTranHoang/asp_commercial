@@ -1,5 +1,3 @@
-import { faSearch, faRefresh } from '@fortawesome/free-solid-svg-icons'
-
 import { Component, OnInit } from '@angular/core'
 
 import { ShopService } from './shop.service'
@@ -10,14 +8,29 @@ import { Product } from '../_models/product'
 import { Pagination } from '../_models/pagination'
 import { Brand } from '../_models/brand'
 
+import {
+  faSearch,
+  faRefresh,
+  faAngleRight,
+  faAnglesRight,
+  faAngleLeft,
+  faAnglesLeft
+} from '@fortawesome/free-solid-svg-icons'
+
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
-  faRefresh = faRefresh
-  faSearch = faSearch
+  icons = {
+    faRefresh,
+    faSearch,
+    faAngleRight,
+    faAnglesRight,
+    faAngleLeft,
+    faAnglesLeft
+  };
 
   sortList = [
     {value: 'name', display: 'Name: A to Z'},
@@ -78,7 +91,8 @@ export class ShopComponent implements OnInit {
   }
 
   resetFilters() {
-    this.userParams = this.shopService.resetUserParams()
+    this.userParams = new UserParams()
+    this.shopService.setUserParams(this.userParams)
     this.loadProducts()
   }
 
@@ -118,13 +132,18 @@ export class ShopComponent implements OnInit {
   }
 
   onSearch() {
-    this.userParams = this.shopService.resetUserParams()
-    this.userParams.search = this.searchTerm
-    this.loadProducts()
+    if (this.userParams) {
+      this.userParams.search = this.searchTerm
+      this.loadProducts()
+    }
   }
 
   onResetSearch() {
     this.searchTerm = ''
     this.onSearch()
+  }
+
+  getMax(currentPage: number, itemsPerPage: number, totalItems: number) {
+    return Math.min(currentPage * itemsPerPage, totalItems)
   }
 }

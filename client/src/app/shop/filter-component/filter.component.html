@@ -4,7 +4,7 @@
     <input type="radio"
            name="{{title}}"
            id="{{item.name + title}}"
-           [checked]="item.id === 0"
+           [checked]="item.id === selectedItemId"
            (click)="onItemSelected(item.id)">
 
     <label for="{{item.name + title}}">
