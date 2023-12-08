@@ -4,14 +4,17 @@ import { PaginationModule } from 'ngx-bootstrap/pagination'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { PagingFooterComponent } from '../_shared/paging-footer/paging-footer.component'
 import { PagerComponent } from '../_shared/pager/pager.component'
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [PagingFooterComponent, PagerComponent,],
   imports: [
     CommonModule,
+    FormsModule,
+
     //Third party module
     PaginationModule.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   exports: [
     PagingFooterComponent,

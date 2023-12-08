@@ -85,9 +85,9 @@ export class ShopComponent implements OnInit {
     this.loadProducts()
   }
 
-  pageChanged(event: any) {
-    if (this.userParams && this.userParams.pageNumber !== event.page) {
-      this.userParams.pageNumber = event.page
+  pageChanged(pageNumber: number) {
+    if (this.userParams && this.userParams.pageNumber !== pageNumber) {
+      this.userParams.pageNumber = pageNumber
       this.shopService.setUserParams(this.userParams)
       this.loadProducts()
     }

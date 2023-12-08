@@ -60,4 +60,4 @@
   </div>
 </div>
 
-<app-pager [pagination]="pagination"></app-pager>
+<app-pager [pagination]="pagination" (pageChanged)="pageChanged($event)"></app-pager>
