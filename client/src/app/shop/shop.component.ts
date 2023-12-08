@@ -8,14 +8,7 @@ import { Product } from '../_models/product'
 import { Pagination } from '../_models/pagination'
 import { Brand } from '../_models/brand'
 
-import {
-  faSearch,
-  faRefresh,
-  faAngleRight,
-  faAnglesRight,
-  faAngleLeft,
-  faAnglesLeft
-} from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faRefresh } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-shop',
@@ -25,12 +18,8 @@ import {
 export class ShopComponent implements OnInit {
   icons = {
     faRefresh,
-    faSearch,
-    faAngleRight,
-    faAnglesRight,
-    faAngleLeft,
-    faAnglesLeft
-  };
+    faSearch
+  }
 
   sortList = [
     {value: 'name', display: 'Name: A to Z'},
@@ -141,9 +130,5 @@ export class ShopComponent implements OnInit {
   onResetSearch() {
     this.searchTerm = ''
     this.onSearch()
-  }
-
-  getMax(currentPage: number, itemsPerPage: number, totalItems: number) {
-    return Math.min(currentPage * itemsPerPage, totalItems)
   }
 }

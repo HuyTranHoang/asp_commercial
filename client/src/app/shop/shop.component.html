@@ -14,7 +14,8 @@
       </app-filter>
 
       <button class="btn btn-outline-primary w-100"
-        (click)="resetFilters()">Reset all filter</button>
+              (click)="resetFilters()">Reset all filter
+      </button>
     </section>
 
     <section class="col bg-body-secondary rounded">
@@ -25,24 +26,26 @@
           <select class="form-select form-select-sm" style="width: 300px">
             <option *ngFor="let sort of sortList" [value]="sort.value" (click)="onSortSelected(sort.value)"
                     class="text-body">
-              {{sort.display}}
+              {{ sort.display }}
             </option>
           </select>
         </div>
 
         <form class="d-flex align-items-center" (ngSubmit)="onSearch()">
           <button class="btn btn-sm me-3" style="background: #593196">
-            <fa-icon [icon]="icons.faRefresh" (click)="onResetSearch()" [style.color]="'#fff'" ></fa-icon>
+            <fa-icon [icon]="icons.faRefresh" (click)="onResetSearch()" [style.color]="'#fff'"></fa-icon>
           </button>
           <div class="d-flex align-items-center position-relative">
             <fa-icon class="position-absolute" style="right: 5px" [icon]="icons.faSearch" (click)="onSearch()"
-                    [ngStyle]="{  'cursor': 'pointer'}"></fa-icon>
-            <input class="form-control form-control-sm" type="text" placeholder="Search..." [(ngModel)]="searchTerm" name="searchTerm">
+                     [ngStyle]="{'cursor': 'pointer'}"></fa-icon>
+            <input class="form-control form-control-sm" type="text" placeholder="Search..." [(ngModel)]="searchTerm"
+                   name="searchTerm">
           </div>
         </form>
       </div>
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 pb-4" *ngIf="products && products.length > 0; else noProductFound">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 pb-4"
+           *ngIf="products && products.length > 0; else noProductFound">
         <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
       </div>
 
@@ -57,41 +60,4 @@
   </div>
 </div>
 
-<div class="d-flex justify-content-between align-content-center mt-3" *ngIf="pagination && products.length > 0">
-
-  <span class="ms-3">
-    Showing {{(pagination.currentPage - 1) * pagination.itemsPerPage + 1}} to
-      {{getMax(pagination.currentPage, pagination.itemsPerPage, pagination.totalItems)}} of
-      {{pagination.totalItems}} items
-  </span>
-
-  <pagination [boundaryLinks]="true"
-              [totalItems]="pagination.totalItems"
-              [itemsPerPage]="pagination.itemsPerPage"
-              [maxSize]="10"
-              [(ngModel)]="pagination.currentPage"
-              (pageChanged)="pageChanged($event)"
-              [customFirstTemplate]="firstTemplate"
-              [customLastTemplate]="lastTemplate"
-              [customPreviousTemplate]="prevTemplate"
-              [customNextTemplate]="nextTemplate">
-  </pagination>
-
-  <ng-template #nextTemplate>
-      <fa-icon [icon]="icons.faAngleRight" [style.color]="'#593196'" ></fa-icon>
-  </ng-template>
-
-  <ng-template #prevTemplate>
-      <fa-icon [icon]="icons.faAngleLeft" [style.color]="'#593196'" ></fa-icon>
-  </ng-template>
-
-  <ng-template #firstTemplate>
-      <fa-icon [icon]="icons.faAnglesLeft" [style.color]="'#593196'" ></fa-icon>
-  </ng-template>
-
-  <ng-template #lastTemplate>
-      <fa-icon [icon]="icons.faAnglesRight" [style.color]="'#593196'" ></fa-icon>
-  </ng-template>
-
-</div>
-
+<app-pager [pagination]="pagination"></app-pager>

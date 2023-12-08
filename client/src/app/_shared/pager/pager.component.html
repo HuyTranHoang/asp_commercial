@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-between align-content-center mt-3" *ngIf="pagination">
+
+  <app-paging-footer [pagination]="pagination"></app-paging-footer>
+
+  <pagination [boundaryLinks]="true"
+              [totalItems]="pagination.totalItems"
+              [itemsPerPage]="pagination.itemsPerPage"
+              [maxSize]="10"
+              [(ngModel)]="pagination.currentPage"
+              (pageChanged)="pageChangedEvent($event)"
+              [customFirstTemplate]="firstTemplate"
+              [customLastTemplate]="lastTemplate"
+              [customPreviousTemplate]="prevTemplate"
+              [customNextTemplate]="nextTemplate">
+  </pagination>
+
+  <ng-template #nextTemplate>
+    <fa-icon [icon]="icons.faAngleRight" [style.color]="'#593196'"></fa-icon>
+  </ng-template>
+
+  <ng-template #prevTemplate>
+    <fa-icon [icon]="icons.faAngleLeft" [style.color]="'#593196'"></fa-icon>
+  </ng-template>
+
+  <ng-template #firstTemplate>
+    <fa-icon [icon]="icons.faAnglesLeft" [style.color]="'#593196'"></fa-icon>
+  </ng-template>
+
+  <ng-template #lastTemplate>
+    <fa-icon [icon]="icons.faAnglesRight" [style.color]="'#593196'"></fa-icon>
+  </ng-template>
+
+</div>
+

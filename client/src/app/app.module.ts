@@ -10,7 +10,8 @@ import { NavComponent }                   from './nav/nav.component'
 import { AppComponent }                   from './app.component'
 import { AppRoutingModule }               from './app-routing.module'
 import { SharedModule }                   from './_modules/shared.module'
-import { APP_CONFIG, APP_SERVICE_CONFIG } from './_appconfig/appconfig.service'
+import { APP_CONFIG, APP_SERVICE_CONFIG } from './_appconfig/appconfig.service';
+
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { APP_CONFIG, APP_SERVICE_CONFIG } from './_appconfig/appconfig.service'
     ShopModule
   ],
   providers: [
-    { provide: APP_SERVICE_CONFIG, useValue: APP_CONFIG },
+    {provide: APP_SERVICE_CONFIG, useValue: APP_CONFIG}
   ],
   bootstrap: [AppComponent]
 })

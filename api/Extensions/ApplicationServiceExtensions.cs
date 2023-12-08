@@ -13,7 +13,7 @@ public static class ApplicationServiceExtensions
     {
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            var connectionString = config.GetConnectionString("DefaultConnection");
+            var connectionString = config.GetConnectionString("LaptopConnection");
             options.UseSqlServer(connectionString);
         });
         services.AddCors();
