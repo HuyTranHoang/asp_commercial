@@ -28,4 +28,8 @@ export class PagerComponent {
   pageChangedEvent(event: any) {
     this.pageChanged.emit(event.page)
   }
+
+  getMax(currentPage: number, itemsPerPage: number, totalItems: number) {
+    return Math.min(currentPage * itemsPerPage, totalItems)
+  }
 }
