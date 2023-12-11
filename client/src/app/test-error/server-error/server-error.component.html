@@ -1,1 +1,5 @@
-<p>server-error works!</p>
+<ng-container *ngIf="error">
+  <code role="alert">
+    {{ error.message }}
+  </code>
+</ng-container>

@@ -4,3 +4,10 @@
   <button class="btn btn-outline-primary" (click)="get400Error()">test 400 error</button>
   <button class="btn btn-outline-primary" (click)="get400ValidationError()">test validation error</button>
 </div>
+
+
+<div class="row mt-5" *ngIf="validationErrors">
+  <ul class="text-danger">
+    <li *ngFor="let item of validationErrors">{{item}}</li>
+  </ul>
+</div>

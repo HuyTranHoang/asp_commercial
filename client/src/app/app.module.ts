@@ -2,7 +2,7 @@ import { BrowserAnimationsModule }        from '@angular/platform-browser/animat
 import { BrowserModule }                  from '@angular/platform-browser'
 import { FormsModule }                    from '@angular/forms'
 import { NgModule }                       from '@angular/core'
-import { HttpClientModule }               from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { NgOptimizedImage }               from '@angular/common'
 
 import { NavComponent }                   from './nav/nav.component'
@@ -11,6 +11,8 @@ import { AppRoutingModule }               from './app-routing.module'
 import { SharedModule }                   from './_modules/shared.module'
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './_appconfig/appconfig.service';
 import { HomeRoutingModule } from './home/home-routing.module'
+import { ErrorInterceptor } from './_middleware/error.interceptor'
+import { NgxSpinnerModule } from 'ngx-spinner'
 
 
 
@@ -28,9 +30,11 @@ import { HomeRoutingModule } from './home/home-routing.module'
     NgOptimizedImage,
     HomeRoutingModule,
     SharedModule,
+    NgxSpinnerModule
   ],
   providers: [
-    {provide: APP_SERVICE_CONFIG, useValue: APP_CONFIG}
+    {provide: APP_SERVICE_CONFIG, useValue: APP_CONFIG},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

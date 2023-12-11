@@ -4,9 +4,10 @@ import { PaginationModule } from 'ngx-bootstrap/pagination'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { PagerComponent } from '../_shared/pager/pager.component'
 import { FormsModule } from '@angular/forms'
+import { ToastrModule } from 'ngx-toastr'
 
 @NgModule({
-  declarations: [PagerComponent,],
+  declarations: [PagerComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -14,11 +15,17 @@ import { FormsModule } from '@angular/forms'
     //Third party module
     PaginationModule.forRoot(),
     FontAwesomeModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      tapToDismiss: true,
+      preventDuplicates: true
+    })
   ],
   exports: [
     PagerComponent,
     PaginationModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ToastrModule
   ]
 })
 export class SharedModule {}

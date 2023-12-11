@@ -10,6 +10,8 @@ import { AppConfig } from '../_appconfig/appconfig.interface'
 })
 export class TestErrorComponent {
 
+  validationErrors: string[] = []
+
   constructor(private http: HttpClient, @Inject(APP_SERVICE_CONFIG) private config: AppConfig) {}
 
   get404Error() {
@@ -51,7 +53,7 @@ export class TestErrorComponent {
         console.log(response)
       },
       error: error => {
-        console.log(error)
+        this.validationErrors = error
       }
     })
   }
