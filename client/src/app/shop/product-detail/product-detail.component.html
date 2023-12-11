@@ -1,1 +1,26 @@
-<p>product-detail works!</p>
+<ng-template [ngIf]="product">
+  <div class="row">
+    <div class="col-4">
+      <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="w-100 img-fluid">
+    </div>
+
+    <div class="col-8">
+      <h3>{{ product.name }}</h3>
+      <p class="currency">{{ product.price | currency }}</p>
+      <div class="d-flex align-items-center">
+        <fa-icon [icon]="faPlusCircle" class="icon text-warning"></fa-icon>
+        <span class="fw-bold mx-2">2</span>
+        <fa-icon [icon]="faMinusCircle" class="icon text-warning"></fa-icon>
+        <button class="btn btn-outline-secondary btn-lg ms-4">Update cart</button>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-12">
+          <h4>Description</h4>
+          <p>{{ product.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-template>

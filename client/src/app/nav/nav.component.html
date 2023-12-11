@@ -20,6 +20,20 @@
            routerLink="/"
         >Shopping</a>
       </li>
+      <li>
+        <a class="nav-link px-2"
+           routerLinkActive="link-primary"
+           [routerLinkActiveOptions]="{ exact: true }"
+           routerLink="/contact"
+        >Contact</a>
+      </li>
+      <li>
+        <a class="nav-link px-2"
+           routerLinkActive="link-primary"
+           [routerLinkActiveOptions]="{ exact: true }"
+           routerLink="/test-error"
+        >Errors</a>
+      </li>
     </ul>
 
     <div class="col-md-3 text-end d-flex">
