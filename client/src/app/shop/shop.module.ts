@@ -7,7 +7,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductCardComponent } from './product-card/product-card.component';
 import { FilterComponent } from './filter-component/filter.component';
 import { ShopRoutingModule } from './shop-routing.module';
-import { SharedModule } from '../_modules/shared.module';
+import { SharedModule } from '../_shared/shared.module';
 
 @NgModule({
   declarations: [

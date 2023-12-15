@@ -1,20 +1,13 @@
-import { Component, OnInit } from '@angular/core'
-import { NgxSpinnerService } from 'ngx-spinner'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent  {
 
-  constructor(private spinner: NgxSpinnerService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.spinner.show()
-      .then((_ => setTimeout(() => {
-        this.spinner.hide()
-      }, 1000)))
-  }
 
 }

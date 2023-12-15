@@ -4,7 +4,7 @@ import { TestErrorComponent } from './test-error.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { TestErrorRoute } from './test-error-routing.module'
-import { SharedModule } from '../_modules/shared.module'
+import { SharedModule } from '../_shared/shared.module'
 
 
 

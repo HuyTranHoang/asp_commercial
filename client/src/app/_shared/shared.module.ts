@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { PaginationModule } from 'ngx-bootstrap/pagination'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-import { PagerComponent } from '../_shared/pager/pager.component'
+import { PagerComponent } from './pager/pager.component'
 import { FormsModule } from '@angular/forms'
 import { ToastrModule } from 'ngx-toastr'
 

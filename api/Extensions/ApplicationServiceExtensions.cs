@@ -4,6 +4,7 @@ using api.Repository;
 using api.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 namespace api.Extensions;
 
@@ -13,12 +14,21 @@ public static class ApplicationServiceExtensions
     {
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            var connectionString = config.GetConnectionString("DefaultConnection");
+            var connectionString = config.GetConnectionString("LaptopConnection");
             options.UseSqlServer(connectionString);
         });
+
+        services.AddSingleton<IConnectionMultiplexer>(_ =>
+        {
+            var redisUrl = ConfigurationOptions.Parse(config.GetConnectionString("RedisConnection"),
+                true);
+            return ConnectionMultiplexer.Connect(redisUrl);
+        });
+
         services.AddCors();
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IBasketRepository, BasketRepository>();
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
