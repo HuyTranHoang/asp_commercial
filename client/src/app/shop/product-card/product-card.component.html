@@ -6,7 +6,7 @@
       <p class="card-text">{{product.price | currency}}</p>
 
       <div class="btn-group w-100">
-        <button type="button" class="btn btn-sm btn-outline-primary">
+        <button type="button" (click)="addItemToBasket()" class="btn btn-sm btn-outline-primary">
           <fa-icon [icon]="faCartPlus"></fa-icon>
         </button>
         <button type="button"
