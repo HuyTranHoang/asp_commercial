@@ -9,10 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a3ef5f6-0ced-4223-9f20-3e36c5d27c82" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/api/Controllers/ProductsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Controllers/ProductsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/Extensions/ApplicationServiceExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Extensions/ApplicationServiceExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/Helpers/RequestQuery/ProductParams.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Helpers/RequestQuery/ProductParams.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/Repository/GenericRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Repository/GenericRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Repository/Interfaces/IUnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Repository/Interfaces/IUnitOfWork.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Repository/UnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Repository/UnitOfWork.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +24,7 @@
     <option name="projectConfigVersion" value="5" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://D:/Aptech/Azure/api/Data/Seed.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Aptech/Azure/api/Extensions/ApplicationBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Aptech/Azure/api/Extensions/ApplicationServiceExtensions.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -148,6 +145,9 @@
       <workItem from="1701929700598" duration="619000" />
       <workItem from="1701930916732" duration="7000" />
       <workItem from="1701946061662" duration="637000" />
+      <workItem from="1702658141815" duration="314000" />
+      <workItem from="1702669734999" duration="1491000" />
+      <workItem from="1702699620984" duration="679000" />
     </task>
     <servers />
   </component>
