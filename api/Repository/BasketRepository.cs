@@ -35,6 +35,8 @@ public class BasketRepository : IBasketRepository
 
             var product = query.FirstOrDefault();
 
+            if (product == null) continue;
+
             var basketItem = new BasketItem()
             {
                 Id = product.Id,
