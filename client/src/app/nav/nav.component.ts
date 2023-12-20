@@ -1,15 +1,14 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
 
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
-
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { BasketService } from '../basket/basket.service';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent {
-
-  faCartShopping = faCartShopping
-
+  constructor(public basketService: BasketService) {}
+  faCartShopping = faCartShopping;
 }

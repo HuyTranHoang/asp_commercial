@@ -1,1 +1,69 @@
-<p>basket works!</p>
+<div *ngIf="basketService.basket && basketService.basket.items.length === 0; else hasItemInBasket">
+  No items in basket
+</div>
+
+<ng-template #hasItemInBasket>
+  <div class="pb-5">
+    <div class="row">
+      <div class="col-12 py-5 mb-1">
+        <table class="table">
+          <thead class="table-primary ">
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+              <th scope="col">Total</th>
+              <th scope="col">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of basketService.basket?.items">
+              <td>
+                <div class="p2 d-flex">
+                  <img src="http://localhost:5001/{{item.pictureUrl}}"
+                  alt="{{item.productName}}"
+                  class="img-fluid"
+                  style="height: 100px; width: 75px; object-fit: cover;">
+                  <div class="ms-3 d-inline-block align-middle">
+                    <h5 class="mb-0">
+                      <a routerLink="/product/{{item.id}}" class="text-dark text-decoration-none">{{item.productName}}</a>
+                      <span class="text-muted fst-italic d-block small">Type: {{item.type}}</span>
+                    </h5>
+                  </div>
+                </div>
+              </td>
+              <td class="align-middle" style="font-size: 1.2em;">
+                <strong>{{item.price | currency}}</strong>
+              </td>
+              <td class="align-middle">
+                <div class="d-flex align-items-center">
+                  <a (click)="basketService.decrementItemQuantity(item)">
+                    <fa-icon [icon]="icons.faMinusCircle" class="text-primary me-2"></fa-icon>
+                  </a>
+                  <span class="fw-bold mx-2">{{item.quantity}}</span>
+                  <a (click)="basketService.incrementItemQuantity(item)">
+                    <fa-icon [icon]="icons.faPlusCircle" class="text-primary ms-2"></fa-icon>
+                  </a>
+                </div>
+              </td>
+              <td class="align-middle" style="font-size: 1.2em;">
+                <strong>{{item.price * item.quantity | currency}}</strong>
+              </td>
+              <td class="align-middle text-center">
+                <a class="text-danger">
+                  <fa-icon [icon]="icons.faTrash"></fa-icon>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6 offset-6">
+        <app-order-totals></app-order-totals>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,25 @@
+<div class="bg-primary-subtle  px-4 py-3 text-uppercase fw-bold ">
+  Order summary
+</div>
+
+<div class="p-4">
+  <ul class="list-unstyled mb-4">
+    <li class="d-flex justify-content-between py-3 border-bottom ">
+      <strong class="text-muted">Order subtotal</strong>
+      <strong>{{basketService.basketTotal.subtotal | currency}}</strong>
+    </li>
+    <li class="d-flex justify-content-between py-3 border-bottom ">
+      <strong class="text-muted">Shipping cost</strong>
+      <strong>{{basketService.basketTotal.shipping | currency}}</strong>
+    </li>
+    <li class="d-flex justify-content-between py-3 border-bottom ">
+      <strong class="text-muted">Total</strong>
+      <strong>{{basketService.basketTotal.total | currency}}</strong>
+    </li>
+  </ul>
+
+  <button class="btn btn-dark rounded-pill py-2 btn-block">
+    <fa-icon [icon]="icons.faShoppingCart" class="me-2"></fa-icon>
+    Proceed to checkout
+  </button>
+</div>

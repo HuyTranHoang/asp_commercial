@@ -39,7 +39,9 @@
     <div class="col-md-3 text-end d-flex">
       <a routerLink="/basket" class="position-relative flex-grow-1 me-3">
         <fa-icon [icon]="faCartShopping" size="2x"></fa-icon>
-        <span class="cart-no">5</span>
+        <span class="cart-no" *ngIf="basketService.basket" >
+          {{ basketService.basket.items.length }}
+        </span>
       </a>
       <button type="button" class="btn btn-outline-primary me-2">Login</button>
       <button type="button" class="btn btn-primary">Sign-up</button>
