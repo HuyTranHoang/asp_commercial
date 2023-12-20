@@ -1,7 +1,9 @@
 using api.Data;
 using api.Entities;
+using api.Helpers;
 using api.Repository.Interfaces;
 using AutoMapper;
+using StackExchange.Redis;
 
 namespace api.Repository
 {

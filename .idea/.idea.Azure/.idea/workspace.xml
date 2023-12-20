@@ -21,8 +21,7 @@
     <option name="projectConfigVersion" value="5" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://D:/Aptech/Azure/api/Data/Seed.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Aptech/Azure/api/Extensions/ApplicationBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Aptech/Azure/api/Extensions/ApplicationServiceExtensions.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -150,6 +149,7 @@
       <workItem from="1702649122057" duration="1561000" />
       <workItem from="1702673482690" duration="95000" />
       <workItem from="1702673629987" duration="62000" />
+
     </task>
     <task id="LOCAL-00001" summary="Add redis">
       <option name="closed" value="true" />

@@ -1,4 +1,5 @@
 using api.Entities;
+using StackExchange.Redis;
 
 namespace api.Repository.Interfaces;
 
