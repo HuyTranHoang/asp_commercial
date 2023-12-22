@@ -1,10 +1,16 @@
+using api.Data;
+using api.Entities.Identity;
 using api.Extensions;
 using api.Middlewares;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddAuthentication();
+
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 
@@ -25,6 +31,22 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MigrateAndSeedDatabase();
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try
+{
+    var context = services.GetRequiredService<ApplicationDbContext>();
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    await context.Database.MigrateAsync();
+    await Seed.SeedTypes(context);
+    await Seed.SeedBrands(context);
+    await Seed.SeedProducts(context);
+    await Seed.SeedUser(userManager);
+}
+catch (Exception ex)
+{
+    var logger = services.GetService<ILogger<Program>>();
+    logger.LogError(ex, "An error occured during migration");
+}
 
 app.Run();

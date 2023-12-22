@@ -55,11 +55,7 @@ public static class Seed
 
     public static async Task SeedUser(UserManager<AppUser> userManager)
     {
-        if (userManager.Users.Any())
-        {
-            Console.WriteLine("11111");
-            return;
-        }
+        if (userManager.Users.Any()) return;
 
         var userData = await File.ReadAllTextAsync(AppUserSeedData);
 
