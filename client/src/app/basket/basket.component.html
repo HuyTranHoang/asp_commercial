@@ -10,8 +10,8 @@
           <thead class="table-primary ">
             <tr>
               <th scope="col">Product</th>
-              <th scope="col">Quantity</th>
               <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
               <th scope="col">Total</th>
               <th scope="col">Remove</th>
             </tr>
@@ -50,7 +50,7 @@
                 <strong>{{item.price * item.quantity | currency}}</strong>
               </td>
               <td class="align-middle text-center">
-                <a class="text-danger">
+                <a class="text-danger" (click)="basketService.removeItemFromBasket(item)">
                   <fa-icon [icon]="icons.faTrash"></fa-icon>
                 </a>
               </td>

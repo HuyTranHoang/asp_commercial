@@ -5,6 +5,7 @@ import {
   faMinusCircle,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
+import { IBasketItem } from '../_models/basket'
 
 @Component({
   selector: 'app-basket',
@@ -17,6 +18,6 @@ export class BasketComponent {
     faMinusCircle,
     faTrash,
   };
-  
+
   constructor(public basketService: BasketService) {}
 }

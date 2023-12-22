@@ -1,0 +1,15 @@
+﻿[
+  {
+    "DisplayName": "Huy nek",
+    "Email": "HuyNek@gmail.com",
+    "UserName": "HuyNek",
+    "Address": {
+      "FirstName": "Huy",
+      "LastName": "Nek",
+      "Street": "123 Nguyen Van Linh",
+      "City": "HCM",
+      "State": "VN",
+      "ZipCode": "70000"
+    }
+  }
+]
