@@ -1,9 +1,5 @@
-using api.Data;
-using api.Entities.Identity;
 using api.Extensions;
 using api.Middlewares;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
