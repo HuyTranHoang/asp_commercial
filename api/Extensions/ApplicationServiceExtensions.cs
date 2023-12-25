@@ -1,9 +1,8 @@
 ﻿using api.Data;
-using api.Entities.Identity;
 using api.Exceptions;
 using api.Repository;
 using api.Repository.Interfaces;
-using Microsoft.AspNetCore.Identity;
+using api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
@@ -16,7 +15,7 @@ public static class ApplicationServiceExtensions
     {
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            var connectionString = config.GetConnectionString("DefaultConnection");
+            var connectionString = config.GetConnectionString("LaptopConnection");
             options.UseSqlServer(connectionString);
         });
 
@@ -31,6 +30,7 @@ public static class ApplicationServiceExtensions
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IBasketRepository, BasketRepository>();
+        services.AddScoped<ITokenService, TokenService>();
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
